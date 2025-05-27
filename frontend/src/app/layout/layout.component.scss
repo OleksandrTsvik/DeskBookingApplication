@@ -1,0 +1,12 @@
+@use '@/styles/styles.scss';
+
+:host {
+  @apply font-inter;
+
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  overflow: clip;
+  color: #2d2d2d;
+  font-size: 16px;
+}

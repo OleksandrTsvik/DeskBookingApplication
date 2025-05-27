@@ -1,0 +1,9 @@
+# Visual Studio
+.vscode
+.vs
+
+# JetBrains IDEA
+.idea
+
+# Volume data
+.containers/
