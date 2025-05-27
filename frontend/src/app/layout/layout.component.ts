@@ -8,6 +8,6 @@ import { MainComponent } from './main/main.component';
   selector: 'app-layout',
   imports: [RouterOutlet, HeaderComponent, MainComponent],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.scss',
+  styleUrl: './layout.component.css',
 })
 export class LayoutComponent {}

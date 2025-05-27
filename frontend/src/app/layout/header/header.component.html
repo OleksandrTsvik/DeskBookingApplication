@@ -1,9 +1,26 @@
-<header class="px-2 py-5 container mx-auto flex items-center justify-between">
+<header class="container mx-auto flex items-center justify-between px-2 py-5">
   <a routerLink="/">
-    <img src="assets/logo.png" alt="logo" class="w-42" />
+    <img
+      class="w-42"
+      src="assets/logo.png"
+      alt="logo"
+    />
   </a>
-  <nav class="font-semibold gap-2 sm:gap-4 md:gap-8 lg:gap-16 flex">
-    <a routerLink="/" routerLinkActive="link_active" class="link">Workspaces</a>
-    <a routerLink="bookings" routerLinkActive="link_active" class="link">My bookings</a>
+  <nav class="flex gap-2 font-semibold sm:gap-4 md:gap-8 lg:gap-16">
+    <a
+      routerLink="/"
+      routerLinkActive="link_active"
+      class="link"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Workspaces
+    </a>
+    <a
+      routerLink="/bookings"
+      routerLinkActive="link_active"
+      class="link"
+    >
+      My bookings
+    </a>
   </nav>
 </header>

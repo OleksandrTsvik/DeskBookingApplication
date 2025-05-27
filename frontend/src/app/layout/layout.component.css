@@ -1,4 +1,4 @@
-@use '@/styles/styles.scss';
+@reference '#styles.css';
 
 :host {
   @apply font-inter;

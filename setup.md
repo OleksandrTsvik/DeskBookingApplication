@@ -6,12 +6,20 @@
 
 ```json
 {
+  "editor.wordWrap": "on",
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+
   "typescript.preferences.importModuleSpecifier": "non-relative",
 
   "terminal.integrated.persistentSessionReviveProcess": "never",
   "terminal.integrated.enablePersistentSessions": false,
 
-  "tailwindCSS.experimental.configFile": "frontend/src/styles/styles.scss",
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
+  "tailwindCSS.experimental.configFile": "frontend/src/styles/styles.css",
 
   "workbench.iconTheme": "material-icon-theme",
   "material-icon-theme.activeIconPack": "angular",

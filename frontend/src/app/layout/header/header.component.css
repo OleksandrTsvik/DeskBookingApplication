@@ -1,0 +1,28 @@
+@reference '#styles.css';
+
+.link {
+  position: relative;
+  padding-block: 10px;
+  line-height: 1.2;
+}
+
+.link::after {
+  @apply transition-opacity;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  background-color: #5c5af3;
+  width: 100%;
+  height: 2px;
+  content: '';
+}
+
+.link:hover::after {
+  opacity: 0.5;
+}
+
+.link_active::after {
+  opacity: 1;
+}

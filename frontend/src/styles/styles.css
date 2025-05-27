@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@use 'tailwindcss';
+@import './fonts.css';
 
-@use './fonts.scss';
+@import 'tailwindcss';
 
 @theme {
   --font-inter: 'Inter', 'sans-serif';
