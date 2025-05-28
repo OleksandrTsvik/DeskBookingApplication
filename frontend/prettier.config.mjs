@@ -24,6 +24,7 @@ const config = {
   ],
   attributeSort: 'ASC',
   attributeGroups: [
+    '^app-',
     '$ANGULAR_ELEMENT_REF',
     '$ANGULAR_STRUCTURAL_DIRECTIVE',
     '^routerLink',
@@ -38,6 +39,8 @@ const config = {
   tailwindStylesheet: './src/styles/styles.css',
   tailwindPreserveWhitespace: false,
   tailwindPreserveDuplicates: false,
+  tailwindAttributes: [],
+  tailwindFunctions: ['clsx', 'tw'],
   plugins: [
     '@trivago/prettier-plugin-sort-imports',
     'prettier-plugin-organize-attributes',
