@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
 
 import { ButtonDirective } from '@/app/shared/components/button/button.directive';
 import { SvgIconComponent } from '@/app/shared/components/svg-icon/svg-icon.component';
@@ -15,4 +15,13 @@ import { SvgIconComponent } from '@/app/shared/components/svg-icon/svg-icon.comp
 export class WorkspaceCardComponent {
   type = input.required<string>();
   description = input.required<string>();
+  photos = input.required<string[]>();
+
+  activePhotoIndex = signal(0);
+
+  activePhoto = computed(() => this.photos()[this.activePhotoIndex()]);
+
+  onPhotoClick(index: number) {
+    this.activePhotoIndex.set(index);
+  }
 }

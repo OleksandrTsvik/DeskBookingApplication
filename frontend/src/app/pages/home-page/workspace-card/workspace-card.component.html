@@ -1,4 +1,25 @@
-<div>photos</div>
+<div>
+  <img
+    class="mb-3 aspect-3/2 w-full rounded-xl object-cover sm:rounded-2xl"
+    [alt]="type()"
+    [src]="activePhoto()"
+  />
+  <div class="flex w-full gap-2">
+    @for (photo of photos(); track $index) {
+      <div
+        class="w-full cursor-pointer"
+        [class.opacity-50]="$index !== activePhotoIndex()"
+        (click)="onPhotoClick($index)"
+      >
+        <img
+          class="aspect-16/13 w-full rounded-lg object-cover"
+          [alt]="type()"
+          [src]="photo"
+        />
+      </div>
+    }
+  </div>
+</div>
 
 <div class="flex flex-col gap-4 sm:gap-8 sm:py-3">
   <div class="grid grid-cols-1 items-start gap-4 sm:grid-cols-[7fr_1.94fr] sm:gap-12">
