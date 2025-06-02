@@ -1,0 +1,61 @@
+<div>photos</div>
+
+<div class="flex flex-col gap-4 sm:gap-8 sm:py-3">
+  <div class="grid grid-cols-1 items-start gap-4 sm:grid-cols-[7fr_1.94fr] sm:gap-12">
+    <div>
+      <h4 class="mb-3 text-[32px] font-semibold">{{ type() }}</h4>
+      <p class="leading-[1.5] text-(--gray-color)">{{ description() }}</p>
+    </div>
+    <a app-button>Book now</a>
+  </div>
+  <div class="flex flex-col flex-wrap gap-x-4 gap-y-4 sm:flex-row sm:gap-x-10 sm:gap-y-8 lg:gap-x-50">
+    <div class="sm:w-53">
+      <div class="mb-3 text-[18px] font-semibold">Amenities</div>
+      <div class="flex flex-wrap gap-3">
+        <svg
+          class="icon"
+          icon="wifi"
+        ></svg>
+        <svg
+          class="icon"
+          icon="air-conditioning"
+        ></svg>
+        <svg
+          class="icon"
+          icon="headphones"
+        ></svg>
+      </div>
+    </div>
+    <div class="grow">
+      <div class="mb-3 text-[18px] font-semibold">Capacity options</div>
+      <div class="flex flex-wrap items-center gap-4 text-[20px] font-medium">
+        <svg
+          class="icon"
+          icon="user"
+        ></svg>
+        1, 2, 5, 10 people
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col gap-3">
+    <div class="text-[18px] leading-[1.2] font-semibold">Availability</div>
+    <p><span class="font-semibold">7 rooms</span>&nbsp;<span class="text-(--gray-color)">for 1 person</span></p>
+    <p><span class="font-semibold">4 rooms</span>&nbsp;<span class="text-(--gray-color)">for up to 2 people</span></p>
+    <p><span class="font-semibold">3 rooms</span>&nbsp;<span class="text-(--gray-color)">for up to 5 people</span></p>
+    <p><span class="font-semibold">1 room</span>&nbsp;<span class="text-(--gray-color)">for up to 10 people</span></p>
+  </div>
+  <div class="rounded-lg bg-(--success-bg-200) px-2 py-2.5 sm:px-4">
+    <span
+      class="float-left me-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-(--success-bg-500) text-white"
+    >
+      <svg
+        class="h-[10.8px] w-[10.8px]"
+        icon="check"
+      ></svg>
+    </span>
+    <p class="leading-[1.5] text-black">
+      This workspace is already booked by you! Room for 2 people
+      <span class="font-semibold">May 18, 2025 to May 23, 2025</span>
+    </p>
+  </div>
+</div>

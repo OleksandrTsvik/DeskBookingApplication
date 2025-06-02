@@ -9,7 +9,8 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', component: HomePageComponent },
+      { path: '', redirectTo: '/workspaces', pathMatch: 'full' },
+      { path: 'workspaces', component: HomePageComponent },
       { path: '**', component: NotFoundPageComponent },
     ],
   },
