@@ -50,12 +50,40 @@ public sealed class DatabaseInitializer
 
     private async Task SeedInitialDataAsync(CancellationToken cancellationToken)
     {
-        await SeedWorkspacesAsync(cancellationToken);
+        _logger.LogInformation("Starting initial data seeding.");
+
+        List<Amenity> allAmenities = await SeedWorkspaceAmenitiesAsync(cancellationToken);
+        await SeedWorkspacesAsync(allAmenities, cancellationToken);
+
+        _logger.LogInformation("Saving changes to the database.");
 
         await _dbContext.SaveChangesAsync(cancellationToken);
+
+        _logger.LogInformation("Initial data seeding completed successfully.");
     }
 
-    private async Task SeedWorkspacesAsync(CancellationToken cancellationToken)
+    private async Task<List<Amenity>> SeedWorkspaceAmenitiesAsync(CancellationToken cancellationToken)
+    {
+        List<Amenity> existingAmenities = await _dbContext.Amenities.ToListAsync(cancellationToken);
+
+        var existingAmenityNames = existingAmenities.Select(amenity => amenity.Name).ToList();
+
+        var newAmenityNames = _seedOptions.Workspaces
+            .SelectMany(workspaceSeed => workspaceSeed.Amenities)
+            .Where(name => !existingAmenityNames.Contains(name))
+            .Distinct()
+            .ToList();
+
+        var newAmenities = newAmenityNames
+            .Select(name => new Amenity { Name = name })
+            .ToList();
+
+        _dbContext.Amenities.AddRange(newAmenities);
+
+        return existingAmenities.Concat(newAmenities).ToList();
+    }
+
+    private async Task SeedWorkspacesAsync(List<Amenity> allAmenities, CancellationToken cancellationToken)
     {
         bool hasAnyWorkspaces = await _dbContext.Workspaces.AnyAsync(cancellationToken);
 
@@ -65,14 +93,15 @@ public sealed class DatabaseInitializer
         }
 
         var workspaces = _seedOptions.Workspaces
-            .Select(workspaceSeed => CreateWorkspace(workspaceSeed))
+            .Select(workspaceSeed => CreateWorkspace(allAmenities, workspaceSeed))
             .ToList();
 
         _dbContext.Workspaces.AddRange(workspaces);
     }
 
-    private static Workspace CreateWorkspace(WorkspaceSeed workspaceSeed)
+    private static Workspace CreateWorkspace(List<Amenity> allAmenities, WorkspaceSeed workspaceSeed)
     {
+        List<Amenity> amenities = GetWorkspaceAmenities(allAmenities, workspaceSeed.Amenities);
         List<Desk> desks = CreateWorkspaceDesks(workspaceSeed.DeskCount);
         List<Room> rooms = CreateWorkspaceRooms(workspaceSeed.RoomConfigurations ?? []);
 
@@ -80,12 +109,18 @@ public sealed class DatabaseInitializer
         {
             Name = workspaceSeed.Name,
             Description = workspaceSeed.Description,
+            Amenities = amenities,
             Desks = desks,
             Rooms = rooms,
         };
 
         return workspace;
     }
+
+    private static List<Amenity> GetWorkspaceAmenities(List<Amenity> allAmenities, string[] amenities) =>
+        allAmenities
+            .Where(amenity => amenities.Contains(amenity.Name))
+            .ToList();
 
     private static List<Desk> CreateWorkspaceDesks(int count) =>
         Enumerable

@@ -6,6 +6,7 @@ namespace Infrastructure.Database;
 
 public sealed class ApplicationDbContext : DbContext
 {
+    public DbSet<Amenity> Amenities { get; set; }
     public DbSet<Booking> Bookings { get; set; }
     public DbSet<Desk> Desks { get; set; }
     public DbSet<Room> Rooms { get; set; }

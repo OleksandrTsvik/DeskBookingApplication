@@ -11,6 +11,7 @@ public sealed class WorkspaceSeed
 {
     public required string Name { get; init; }
     public required string Description { get; init; }
+    public required string[] Amenities { get; init; }
     public required int DeskCount { get; init; }
     public required RoomConfigurationSeed[]? RoomConfigurations { get; init; }
 }
