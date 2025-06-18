@@ -1,4 +1,5 @@
 using Api.Options.Models;
+using Infrastructure.Options;
 using Microsoft.Extensions.Options;
 
 namespace Api.Options;
@@ -8,6 +9,8 @@ public static class OptionsExtensions
     public static IServiceCollection AddOptionsWithValidation(this IServiceCollection services)
     {
         services.AddOptionsWithFluentValidation<CorsOptions>(CorsOptions.ConfigurationSectionName);
+
+        services.AddOptionsWithFluentValidation<SeedOptions>(SeedOptions.ConfigurationSectionName);
 
         return services;
     }

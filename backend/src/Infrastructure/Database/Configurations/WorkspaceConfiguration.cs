@@ -14,5 +14,10 @@ public sealed class WorkspaceConfiguration : IEntityTypeConfiguration<Workspace>
             .Property(workspace => workspace.Name)
             .IsRequired()
             .HasMaxLength(WorkspaceRules.MaxNameLength);
+
+        builder
+            .Property(workspace => workspace.Description)
+            .IsRequired()
+            .HasMaxLength(WorkspaceRules.MaxDescriptionLength);
     }
 }
