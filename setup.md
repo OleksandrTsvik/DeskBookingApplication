@@ -46,12 +46,23 @@
   "autokill": true,
   "terminals": [
     {
+      "name": "database",
+      "icon": "database",
+      "color": "terminal.ansiBrightBlue",
+      "commands": [
+        "docker-compose -f docker-compose.dev.yml up postgres pgadmin4",
+        "docker-compose -f docker-compose.dev.yml down postgres pgadmin4"
+      ],
+      "execute": false,
+      "shellPath": "C:\\Program Files\\Git\\bin\\bash.exe"
+    },
+    {
       "name": "backend",
       "icon": "server",
       "color": "terminal.ansiGreen",
       "commands": [
         "cd backend/src/Api",
-        "dotnet watch --no-hot-reload --environment Local --launch-profile Local"
+        "dotnet watch --no-hot-reload --environment Development --launch-profile Development"
       ],
       "execute": false,
       "shellPath": "C:\\Program Files\\Git\\bin\\bash.exe"
