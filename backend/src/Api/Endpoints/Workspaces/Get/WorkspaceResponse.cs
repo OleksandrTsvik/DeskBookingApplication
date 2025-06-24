@@ -4,6 +4,7 @@ public sealed record WorkspaceResponse(
     Guid Id,
     string Name,
     string Description,
+    List<string> Photos,
     List<string> Amenities,
     int DeskCount,
     List<WorkspaceRoomResponse> Rooms);

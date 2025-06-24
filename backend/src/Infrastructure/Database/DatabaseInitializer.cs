@@ -101,6 +101,7 @@ public sealed class DatabaseInitializer
 
     private static Workspace CreateWorkspace(List<Amenity> allAmenities, WorkspaceSeed workspaceSeed)
     {
+        List<WorkspacePhoto> photos = CreateWorkspacePhotos(workspaceSeed.PhotoUrls);
         List<Amenity> amenities = GetWorkspaceAmenities(allAmenities, workspaceSeed.Amenities);
         List<Desk> desks = CreateWorkspaceDesks(workspaceSeed.DeskCount);
         List<Room> rooms = CreateWorkspaceRooms(workspaceSeed.RoomConfigurations ?? []);
@@ -109,6 +110,7 @@ public sealed class DatabaseInitializer
         {
             Name = workspaceSeed.Name,
             Description = workspaceSeed.Description,
+            Photos = photos,
             Amenities = amenities,
             Desks = desks,
             Rooms = rooms,
@@ -116,6 +118,11 @@ public sealed class DatabaseInitializer
 
         return workspace;
     }
+
+    private static List<WorkspacePhoto> CreateWorkspacePhotos(string[] photoUrls) =>
+        photoUrls
+            .Select(url => new WorkspacePhoto { Url = url })
+            .ToList();
 
     private static List<Amenity> GetWorkspaceAmenities(List<Amenity> allAmenities, string[] amenities) =>
         allAmenities

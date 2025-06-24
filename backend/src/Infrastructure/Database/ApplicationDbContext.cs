@@ -11,6 +11,7 @@ public sealed class ApplicationDbContext : DbContext
     public DbSet<Desk> Desks { get; set; }
     public DbSet<Room> Rooms { get; set; }
     public DbSet<Workspace> Workspaces { get; set; }
+    public DbSet<WorkspacePhoto> WorkspacePhotos { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)

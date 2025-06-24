@@ -20,8 +20,10 @@ public class SeedOptionsValidator : AbstractValidator<SeedOptions>
                 .MinimumLength(WorkspaceRules.MinDescriptionLength)
                 .MaximumLength(WorkspaceRules.MaxDescriptionLength);
 
-            workspace.RuleFor(x => x.Amenities).NotNull();
+            workspace.RuleFor(x => x.PhotoUrls).NotNull();
+            workspace.RuleForEach(x => x.PhotoUrls).NotEmpty();
 
+            workspace.RuleFor(x => x.Amenities).NotNull();
             workspace.RuleForEach(x => x.Amenities).NotEmpty();
 
             workspace.RuleFor(x => x.DeskCount).GreaterThanOrEqualTo(0);
