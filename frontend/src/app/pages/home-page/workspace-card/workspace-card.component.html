@@ -62,24 +62,40 @@
     @if (deskCount() || displayRooms()?.length) {
       <div class="flex flex-col gap-3">
         <div class="text-[18px] leading-[1.2] font-semibold">Availability</div>
-        @if (deskCount()) {
+        @if (deskCount(); as deskCount) {
           <div class="flex flex-wrap items-center gap-4 text-[20px] font-medium">
             <svg
               class="icon"
               icon="armchair"
             ></svg>
-            {{ deskCount() }} desks
+            <ng-container [ngPlural]="deskCount">
+              <ng-template ngPluralCase="=1">1 desk</ng-template>
+              <ng-template ngPluralCase="other">{{ deskCount }} desks</ng-template>
+            </ng-container>
           </div>
         }
         @for (room of displayRooms(); track $index) {
           <p>
-            <span class="font-semibold">{{ room.count }} rooms</span>
-            <span class="text-(--gray-color)">&nbsp;for up to {{ room.capacity }} people</span>
+            <span
+              class="font-semibold"
+              [ngPlural]="room.count"
+            >
+              <ng-template ngPluralCase="=1">1 room</ng-template>
+              <ng-template ngPluralCase="other">{{ room.count }} rooms</ng-template>
+            </span>
+            <span
+              class="text-(--gray-color)"
+              [ngPlural]="room.capacity"
+            >
+              <ng-template ngPluralCase="=1">&nbsp;for 1 person</ng-template>
+              <ng-template ngPluralCase="other">&nbsp;for up to {{ room.capacity }} people</ng-template>
+            </span>
           </p>
         }
       </div>
     }
   </div>
+
   <div class="rounded-lg bg-(--success-bg-200) px-2 py-2.5 sm:px-4">
     <span
       class="float-left me-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-(--success-bg-500) text-white"

@@ -1,3 +1,4 @@
+import { NgPlural, NgPluralCase } from '@angular/common';
 import { Component, computed, input, signal } from '@angular/core';
 
 import { ButtonDirective } from '@/app/shared/components/button/button.directive';
@@ -10,7 +11,7 @@ const MAX_DISPLAY_PHOTOS = 4;
 
 @Component({
   selector: 'app-workspace-card',
-  imports: [ButtonDirective, SvgIconComponent, AmenitySvgIconDirective],
+  imports: [NgPlural, NgPluralCase, ButtonDirective, SvgIconComponent, AmenitySvgIconDirective],
   templateUrl: './workspace-card.component.html',
   styleUrl: './workspace-card.component.css',
   host: {
@@ -40,7 +41,11 @@ export class WorkspaceCardComponent {
       .map((room) => room.capacity)
       .sort((a, b) => a - b);
 
-    if (capacities.length == 2) {
+    if (capacities.length === 1 && capacities[0] === 1) {
+      return '1 person';
+    }
+
+    if (capacities.length === 2) {
       return capacities.join(' or ') + ' people';
     }
 
