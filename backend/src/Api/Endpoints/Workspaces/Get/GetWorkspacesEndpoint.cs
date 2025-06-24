@@ -1,4 +1,3 @@
-using Domain.Workspaces;
 using Infrastructure.Database;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
@@ -13,11 +12,24 @@ public sealed class GetWorkspacesEndpoint : IEndpoint
             .WithTags(Tags.Workspaces);
     }
 
-    public async Task<Ok<List<Workspace>>> Handler(
+    public async Task<Ok<List<WorkspaceResponse>>> Handler(
         ApplicationDbContext dbContext,
         CancellationToken cancellationToken)
     {
-        List<Workspace> workspaces = await dbContext.Workspaces.ToListAsync(cancellationToken);
+        List<WorkspaceResponse> workspaces = await dbContext.Workspaces
+            .Select(workspace => new WorkspaceResponse(
+                workspace.Id,
+                workspace.Name,
+                workspace.Description,
+                workspace.Amenities.Select(amenity => amenity.Name).ToList(),
+                workspace.Desks.Count(),
+                workspace.Rooms
+                    .GroupBy(room => room.Capacity)
+                    .Select(groupedRooms => new WorkspaceRoomResponse(
+                        groupedRooms.Count(),
+                        groupedRooms.Key))
+                    .ToList()))
+            .ToListAsync(cancellationToken);
 
         return TypedResults.Ok(workspaces);
     }

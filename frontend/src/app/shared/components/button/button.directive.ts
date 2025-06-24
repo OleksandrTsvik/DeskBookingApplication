@@ -34,7 +34,7 @@ function buildTwClasses(variant: ButtonVariant, color: ButtonColor): string {
 }
 
 @Directive({
-  selector: '[app-button]',
+  selector: '[appButton]',
 })
 export class ButtonDirective {
   @HostBinding('class')

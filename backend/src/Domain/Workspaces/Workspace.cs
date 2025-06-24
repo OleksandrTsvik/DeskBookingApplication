@@ -7,7 +7,7 @@ public sealed class Workspace
     public required string Name { get; set; }
     public required string Description { get; set; }
 
-    public List<Amenity>? Amenities { get; set; }
-    public List<Desk>? Desks { get; set; }
-    public List<Room>? Rooms { get; set; }
+    public List<Amenity> Amenities { get; set; } = [];
+    public List<Desk> Desks { get; set; } = [];
+    public List<Room> Rooms { get; set; } = [];
 }

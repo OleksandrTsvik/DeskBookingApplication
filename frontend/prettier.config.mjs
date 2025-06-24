@@ -24,9 +24,9 @@ const config = {
   ],
   attributeSort: 'ASC',
   attributeGroups: [
-    '^app-',
     '$ANGULAR_ELEMENT_REF',
     '$ANGULAR_STRUCTURAL_DIRECTIVE',
+    '^app',
     '^routerLink',
     '$CODE_GUIDE',
     '$DEFAULT',

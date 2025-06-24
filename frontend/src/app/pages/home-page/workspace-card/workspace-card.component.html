@@ -1,69 +1,84 @@
 <div>
   <img
     class="mb-3 aspect-3/2 w-full rounded-xl object-cover sm:rounded-2xl"
-    [alt]="type()"
+    [alt]="name()"
     [src]="activePhoto()"
   />
-  <div class="flex w-full gap-2">
-    @for (photo of photos(); track $index) {
-      <div
-        class="w-full cursor-pointer"
-        [class.opacity-50]="$index !== activePhotoIndex()"
-        (click)="onPhotoClick($index)"
-      >
-        <img
-          class="aspect-16/13 w-full rounded-lg object-cover"
-          [alt]="type()"
-          [src]="photo"
-        />
-      </div>
-    }
-  </div>
+  @if (displayPhotos().length > 1) {
+    <div class="grid w-full grid-cols-4 flex-wrap gap-2">
+      @for (photo of displayPhotos(); track $index) {
+        <div
+          class="w-full cursor-pointer"
+          [class.opacity-50]="$index !== activePhotoIndex()"
+          (click)="onPhotoClick($index)"
+        >
+          <img
+            class="aspect-16/13 w-full rounded-lg object-cover"
+            [alt]="name()"
+            [src]="photo"
+          />
+        </div>
+      }
+    </div>
+  }
 </div>
 
 <div class="flex flex-col gap-4 sm:gap-8 sm:py-3">
   <div class="grid grid-cols-1 items-start gap-4 sm:grid-cols-[7fr_1.94fr] sm:gap-12">
     <div>
-      <h4 class="mb-3 text-[32px] font-semibold">{{ type() }}</h4>
+      <h4 class="mb-3 text-[32px] font-semibold">{{ name() }}</h4>
       <p class="leading-[1.5] text-(--gray-color)">{{ description() }}</p>
     </div>
-    <a app-button>Book now</a>
+    <a appButton>Book now</a>
   </div>
-  <div class="flex flex-col flex-wrap gap-x-4 gap-y-4 sm:flex-row sm:gap-x-10 sm:gap-y-8 lg:gap-x-50">
-    <div class="sm:w-53">
-      <div class="mb-3 text-[18px] font-semibold">Amenities</div>
-      <div class="flex flex-wrap gap-3">
-        <svg
-          class="icon"
-          icon="wifi"
-        ></svg>
-        <svg
-          class="icon"
-          icon="air-conditioning"
-        ></svg>
-        <svg
-          class="icon"
-          icon="headphones"
-        ></svg>
+  <div class="grid gap-x-4 gap-y-4 sm:gap-x-10 sm:gap-y-8 md:grid-cols-[13.25rem_1fr] lg:gap-x-32 xl:gap-x-50">
+    @if (amenities()?.length) {
+      <div>
+        <div class="mb-3 text-[18px] font-semibold">Amenities</div>
+        <div class="flex flex-wrap gap-3">
+          @for (amenity of amenities(); track $index) {
+            <svg
+              *appAmenitySvgIcon="amenity; let icon = icon"
+              class="icon"
+              [icon]="icon"
+              [title]="amenity"
+            ></svg>
+          }
+        </div>
       </div>
-    </div>
-    <div class="grow">
-      <div class="mb-3 text-[18px] font-semibold">Capacity options</div>
-      <div class="flex flex-wrap items-center gap-4 text-[20px] font-medium">
-        <svg
-          class="icon"
-          icon="user"
-        ></svg>
-        1, 2, 5, 10 people
+    }
+    @if (capacityRooms()) {
+      <div>
+        <div class="mb-3 text-[18px] font-semibold">Capacity options</div>
+        <div class="flex flex-wrap items-center gap-4 text-[20px] font-medium">
+          <svg
+            class="icon"
+            icon="user"
+          ></svg>
+          {{ capacityRooms() }}
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="flex flex-col gap-3">
-    <div class="text-[18px] leading-[1.2] font-semibold">Availability</div>
-    <p><span class="font-semibold">7 rooms</span>&nbsp;<span class="text-(--gray-color)">for 1 person</span></p>
-    <p><span class="font-semibold">4 rooms</span>&nbsp;<span class="text-(--gray-color)">for up to 2 people</span></p>
-    <p><span class="font-semibold">3 rooms</span>&nbsp;<span class="text-(--gray-color)">for up to 5 people</span></p>
-    <p><span class="font-semibold">1 room</span>&nbsp;<span class="text-(--gray-color)">for up to 10 people</span></p>
+    }
+    @if (deskCount() || displayRooms()?.length) {
+      <div class="flex flex-col gap-3">
+        <div class="text-[18px] leading-[1.2] font-semibold">Availability</div>
+        @if (deskCount()) {
+          <div class="flex flex-wrap items-center gap-4 text-[20px] font-medium">
+            <svg
+              class="icon"
+              icon="armchair"
+            ></svg>
+            {{ deskCount() }} desks
+          </div>
+        }
+        @for (room of displayRooms(); track $index) {
+          <p>
+            <span class="font-semibold">{{ room.count }} rooms</span>
+            <span class="text-(--gray-color)">&nbsp;for up to {{ room.capacity }} people</span>
+          </p>
+        }
+      </div>
+    }
   </div>
   <div class="rounded-lg bg-(--success-bg-200) px-2 py-2.5 sm:px-4">
     <span
