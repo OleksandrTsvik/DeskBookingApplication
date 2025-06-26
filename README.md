@@ -1,5 +1,7 @@
 # Desk Booking Application
 
+Project for learning Angular, developed based on Radency's first-stage test task.
+
 ## 🐳 Docker
 
 ### Up

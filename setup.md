@@ -10,10 +10,14 @@
   "editor.formatOnPaste": false,
   "editor.formatOnSave": true,
 
-  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifier": "shortest",
 
   "terminal.integrated.persistentSessionReviveProcess": "never",
   "terminal.integrated.enablePersistentSessions": false,
+
+  "workbench.editorAssociations": {
+    "*.svg": "default"
+  },
 
   "files.associations": {
     "*.css": "tailwindcss"
@@ -30,6 +34,7 @@
     "Domain": "dump",
     "Infrastructure": "tools",
 
+    "features": "tasks",
     "interceptors": "middleware"
   }
 }
