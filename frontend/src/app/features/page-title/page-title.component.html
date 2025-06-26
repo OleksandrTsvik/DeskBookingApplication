@@ -1,0 +1,23 @@
+@if (backLink()) {
+  <div>
+    <a
+      class="my-5 inline-flex items-center gap-1 py-2 pe-4 font-semibold text-(--primary-color) hover:opacity-85"
+      [routerLink]="backLink()"
+    >
+      <svg
+        class="h-5 w-5"
+        icon="chevron-left"
+      ></svg>
+      Go back
+    </a>
+  </div>
+}
+
+<h1
+  [ngClass]="{
+    'mb-5 text-2xl font-bold sm:mb-11 md:text-3xl lg:text-[40px]': true,
+    'mt-6 lg:mt-19': !backLink(),
+  }"
+>
+  {{ text() }}
+</h1>

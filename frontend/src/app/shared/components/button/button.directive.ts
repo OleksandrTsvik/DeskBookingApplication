@@ -1,7 +1,7 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 import { clsx } from 'clsx';
 
-import { tw } from '@/app/shared/utils/tailwind.utils';
+import { tw } from '@/shared/utils/tailwind.utils';
 
 type ButtonVariant = 'solid' | 'outlined';
 type ButtonColor = 'primary' | 'danger';

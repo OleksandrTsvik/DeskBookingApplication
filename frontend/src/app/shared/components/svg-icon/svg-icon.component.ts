@@ -5,6 +5,7 @@ export type SvgIcon =
   | 'armchair'
   | 'calendar'
   | 'check'
+  | 'chevron-left'
   | 'chevron'
   | 'clock-hour-3'
   | 'coffee'

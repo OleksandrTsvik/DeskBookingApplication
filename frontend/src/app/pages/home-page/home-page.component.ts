@@ -1,12 +1,14 @@
 import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 
+import { PageTitleComponent } from '@/features/page-title/page-title.component';
+
 import { WorkspaceResponse } from './home-page.models';
 import { HomePageService } from './home-page.service';
 import { WorkspaceCardComponent } from './workspace-card/workspace-card.component';
 
 @Component({
   selector: 'app-home-page',
-  imports: [WorkspaceCardComponent],
+  imports: [PageTitleComponent, WorkspaceCardComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',
 })

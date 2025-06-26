@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { ButtonDirective } from '@/app/shared/components/button/button.directive';
+import { ButtonDirective } from '@/shared/components/button/button.directive';
 
 @Component({
   selector: 'app-not-found-page',
