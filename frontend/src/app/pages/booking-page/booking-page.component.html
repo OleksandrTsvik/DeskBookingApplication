@@ -1,0 +1,112 @@
+<app-page-title
+  backLink="/workspaces"
+  text="Book your workspace"
+/>
+
+<form
+  class="form"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+>
+  <div class="section">
+    <h3 class="section__title">Reservation details</h3>
+
+    <app-input
+      name="name"
+      formControlName="name"
+      label="Name"
+    />
+
+    <app-input
+      name="email"
+      formControlName="email"
+      label="Email"
+    />
+
+    <app-dropdown
+      name="workspaceType"
+      formControlName="workspaceType"
+      label="Workspace type"
+      placeholder="Choose your workspace"
+      [options]="[
+        {
+          label: 'Open space',
+          value: 'Open space',
+        },
+        {
+          label: 'Private rooms',
+          value: 'Private rooms',
+        },
+        {
+          label: 'Meeting rooms',
+          value: 'Meeting rooms',
+        },
+      ]"
+    />
+
+    <app-checkbox-group label="What room size do you need?">
+      <app-checkbox
+        name="0"
+        value="1"
+      >
+        Room for <span class="font-semibold">1 person</span>
+      </app-checkbox>
+      <app-checkbox
+        name="1"
+        value="2"
+      >
+        Room for <span class="font-semibold">2 people</span>
+      </app-checkbox>
+      <app-checkbox
+        name="2"
+        value="5"
+      >
+        Room for <span class="font-semibold">5 people</span>
+      </app-checkbox>
+      <app-checkbox
+        name="3"
+        value="10"
+      >
+        Room for <span class="font-semibold">10 people</span>
+      </app-checkbox>
+    </app-checkbox-group>
+  </div>
+
+  <div class="section">
+    <h3 class="section__title">Choose date and time</h3>
+
+    <app-date-picker
+      name="startDate"
+      formControlName="startDate"
+      label="Start date"
+    />
+
+    <app-date-picker
+      name="endDate"
+      formControlName="endDate"
+      label="End date"
+    />
+
+    <app-time-dropdown
+      name="startTime"
+      formControlName="startTime"
+      label="Start time"
+      placeholder="Choose start time"
+    />
+
+    <app-time-dropdown
+      name="endTime"
+      formControlName="endTime"
+      label="End time"
+      placeholder="Choose end time"
+    />
+
+    <button
+      appButton
+      class="w-full"
+      type="submit"
+    >
+      Submit
+    </button>
+  </div>
+</form>
