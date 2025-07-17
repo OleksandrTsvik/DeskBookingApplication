@@ -1,7 +1,7 @@
-import { Component, ElementRef, HostListener, OnInit, computed, inject, input, model, output } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, computed, inject, input, model, output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { OnChangeControlFn, OnTouchedControlFn } from '@/shared/models/form.models';
+import { CompareFn, OnChangeControlFn, OnTouchedControlFn } from '@/shared/models/form.models';
 
 import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 
@@ -32,11 +32,14 @@ export class DropdownComponent<ValueType> implements ControlValueAccessor {
   placeholder = input<string>();
   disabled = input(false);
 
+  @Input()
+  compareWith: CompareFn<ValueType | undefined> = (o1, o2) => o1 === o2;
+
   change = output<ValueType>();
   touch = output();
 
   value = model<ValueType>();
-  option = computed(() => this.options()?.find((option) => option.value === this.value()));
+  option = computed(() => this.options()?.find((option) => this.compareWith(option.value, this.value())));
   isOpen = false;
   isTouched = false;
   isDisabled = this.disabled();

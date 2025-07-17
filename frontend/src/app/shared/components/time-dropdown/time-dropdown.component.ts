@@ -1,7 +1,7 @@
 import { Component, OnInit, input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { OnChangeControlFn, OnTouchedControlFn } from '@/shared/models/form.models';
+import { CompareFn, OnChangeControlFn, OnTouchedControlFn } from '@/shared/models/form.models';
 
 import { DropdownComponent, DropdownOption } from '../dropdown/dropdown.component';
 
@@ -41,6 +41,9 @@ export class TimeDropdownComponent implements ControlValueAccessor, OnInit {
   private currentDate = new Date();
   private currentHours = this.currentDate.getHours();
   private currentMinutes = this.currentDate.getMinutes();
+
+  compareOptions: CompareFn<TimeDropdownValue | undefined> = (time1, time2) =>
+    time1?.hours === time2?.hours && time1?.minutes === time2?.minutes;
 
   private onChangeControl: OnChangeControlFn<TimeDropdownValue | undefined> = () => {};
   private onTouchedControl: OnTouchedControlFn = () => {};

@@ -8,10 +8,12 @@
 }
 
 <app-dropdown
+  [compareWith]="compareOptions"
   [disabled]="isDisabled"
   [name]="name()"
   [options]="options"
   [placeholder]="placeholder()"
+  [value]="value"
   (change)="onChange($event)"
   (touch)="onTouch()"
 />

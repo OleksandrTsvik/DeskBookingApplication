@@ -34,7 +34,7 @@
     <li
       class="menu__item"
       role="menuitem"
-      [class.item_active]="option.value === value()"
+      [class.item_active]="compareWith(option.value, value())"
       (click)="onOptionClick(option)"
     >
       {{ option.label }}
