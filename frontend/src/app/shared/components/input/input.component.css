@@ -1,0 +1,28 @@
+@reference '#styles.css';
+
+:host {
+  @apply w-full;
+}
+
+.label {
+  @apply mb-2 block font-medium;
+}
+
+.input {
+  @apply block w-full font-medium;
+
+  border: 1px solid #c2bcd8;
+  border-radius: var(--radius-lg);
+  background: #fcfbff;
+  padding: 14px 16px;
+
+  @variant focus {
+    @apply ring-2 ring-[#b19cd9] outline-none;
+  }
+
+  @variant placeholder {
+    @apply font-normal;
+
+    color: #787878;
+  }
+}
