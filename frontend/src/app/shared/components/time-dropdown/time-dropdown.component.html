@@ -1,0 +1,17 @@
+@if (label()) {
+  <label
+    class="label"
+    [for]="name()"
+  >
+    {{ label() }}
+  </label>
+}
+
+<app-dropdown
+  [disabled]="isDisabled"
+  [name]="name()"
+  [options]="options"
+  [placeholder]="placeholder()"
+  (change)="onChange($event)"
+  (touch)="onTouch()"
+/>
