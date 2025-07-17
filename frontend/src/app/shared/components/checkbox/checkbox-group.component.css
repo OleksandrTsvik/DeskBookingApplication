@@ -1,0 +1,13 @@
+@reference '#styles.css';
+
+:host {
+  @apply w-full;
+}
+
+.label {
+  @apply mb-6 block font-medium;
+}
+
+.list {
+  @apply flex flex-col gap-4 text-sm font-normal;
+}

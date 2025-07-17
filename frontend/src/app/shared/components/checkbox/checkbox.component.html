@@ -1,0 +1,24 @@
+<label [for]="name()">
+  <input
+    class="peer checkbox"
+    type="checkbox"
+    [checked]="isChecked"
+    [disabled]="isDisabled"
+    [id]="name()"
+    [name]="name()"
+    [value]="value()"
+    (blur)="onBlur()"
+    (change)="onChange($event)"
+  />
+  <span class="icon">
+    <svg
+      height="18"
+      icon="check"
+      viewBox="0 0 12 12"
+      width="18"
+    ></svg>
+  </span>
+</label>
+<label [for]="name()">
+  <ng-content />
+</label>
