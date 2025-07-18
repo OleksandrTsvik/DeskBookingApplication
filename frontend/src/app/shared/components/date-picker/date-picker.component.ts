@@ -156,6 +156,8 @@ export class DatePickerComponent implements ControlValueAccessor, Validator, OnI
     this.selectedMonth && date.setMonth(this.selectedMonth);
     this.selectedDay && date.setDate(this.selectedDay);
 
+    date.setHours(0, 0, 0, 0);
+
     return date;
   }
 

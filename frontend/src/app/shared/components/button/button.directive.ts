@@ -8,7 +8,7 @@ type ButtonColor = 'primary' | 'danger';
 
 type ButtonTheme = `${ButtonVariant}-${ButtonColor}`;
 
-const base = tw`inline-flex cursor-pointer items-center justify-center text-center font-semibold select-none`;
+const base = tw`inline-flex cursor-pointer items-center justify-center text-center font-semibold select-none disabled:cursor-not-allowed disabled:opacity-20`;
 const size = tw`gap-x-2 rounded-lg px-6 py-3.5 focus-visible:outline-2 focus-visible:outline-offset-2`;
 
 const themeClasses: Record<ButtonTheme, string> = {

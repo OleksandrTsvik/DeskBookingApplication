@@ -22,34 +22,35 @@ export class CheckboxGroupComponent<ValueType> implements ControlValueAccessor {
   private checkboxes = contentChildren(CheckboxComponent);
 
   label = input<string>();
+  single = input<boolean>(false);
 
   values: ValueType[] = [];
   isTouched = false;
 
-  private onChangeControl: OnChangeControlFn<ValueType[]> = () => {};
+  private onChangeControl: OnChangeControlFn<ValueType[] | ValueType> = () => {};
   private onTouchedControl: OnTouchedControlFn = () => {};
 
   onChange(value: ValueType): void {
     if (this.values.includes(value)) {
       this.values = this.values.filter((item) => item !== value);
     } else {
-      this.values = [...this.values, value];
+      this.values = this.single() ? [value] : [...this.values, value];
     }
 
     this.updateCheckboxes();
     this.markAsTouched();
-    this.onChangeControl(this.values);
+    this.onChangeControl(this.single() ? this.values[0] : this.values);
   }
 
-  writeValue(values: ValueType[]): void {
-    this.values = values;
+  writeValue(values: ValueType[] | undefined): void {
+    this.values = values ?? [];
 
     this.checkboxes().forEach((checkbox) => {
       checkbox.isChecked = this.values.includes(checkbox.value());
     });
   }
 
-  registerOnChange(fn: OnChangeControlFn<ValueType[]>): void {
+  registerOnChange(fn: OnChangeControlFn<ValueType[] | ValueType>): void {
     this.onChangeControl = fn;
   }
 

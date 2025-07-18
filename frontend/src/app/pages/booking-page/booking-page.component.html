@@ -25,86 +25,86 @@
 
     <app-dropdown
       name="workspaceType"
-      formControlName="workspaceType"
+      formControlName="workspaceTypeId"
       label="Workspace type"
       placeholder="Choose your workspace"
-      [options]="[
-        {
-          label: 'Open space',
-          value: 'Open space',
-        },
-        {
-          label: 'Private rooms',
-          value: 'Private rooms',
-        },
-        {
-          label: 'Meeting rooms',
-          value: 'Meeting rooms',
-        },
-      ]"
+      [options]="workspaceTypeOptions()"
+      (change)="onWorkspaceTypeIdChange($event)"
     />
 
-    <app-checkbox-group label="What room size do you need?">
-      <app-checkbox
-        name="0"
-        value="1"
+    @if (roomCapacities()?.length) {
+      <app-checkbox-group
+        formControlName="roomSize"
+        label="What room size do you need?"
+        [single]="true"
       >
-        Room for <span class="font-semibold">1 person</span>
-      </app-checkbox>
-      <app-checkbox
-        name="1"
-        value="2"
-      >
-        Room for <span class="font-semibold">2 people</span>
-      </app-checkbox>
-      <app-checkbox
-        name="2"
-        value="5"
-      >
-        Room for <span class="font-semibold">5 people</span>
-      </app-checkbox>
-      <app-checkbox
-        name="3"
-        value="10"
-      >
-        Room for <span class="font-semibold">10 people</span>
-      </app-checkbox>
-    </app-checkbox-group>
+        @for (capacity of roomCapacities(); track capacity) {
+          <app-checkbox
+            name="roomCapacity-{{ $index }}"
+            [value]="capacity"
+          >
+            Room for
+            <span
+              class="font-semibold"
+              [ngPlural]="capacity"
+            >
+              <ng-template ngPluralCase="=1">1 person</ng-template>
+              <ng-template ngPluralCase="other">{{ capacity }} people</ng-template>
+            </span>
+          </app-checkbox>
+        }
+      </app-checkbox-group>
+    }
+
+    @if (deskCountOptions()?.length) {
+      <app-dropdown
+        name="deskCount"
+        formControlName="deskCount"
+        label="How many desks do you need?"
+        placeholder="Choose number of desks"
+        [options]="deskCountOptions()!"
+      />
+    }
   </div>
 
   <div class="section">
     <h3 class="section__title">Choose date and time</h3>
 
-    <app-date-picker
-      name="startDate"
-      formControlName="startDate"
-      label="Start date"
-    />
+    <ng-container formGroupName="date">
+      <app-date-picker
+        name="startDate"
+        formControlName="startDate"
+        label="Start date"
+      />
 
-    <app-date-picker
-      name="endDate"
-      formControlName="endDate"
-      label="End date"
-    />
+      <app-date-picker
+        name="endDate"
+        formControlName="endDate"
+        label="End date"
+      />
+    </ng-container>
 
-    <app-time-dropdown
-      name="startTime"
-      formControlName="startTime"
-      label="Start time"
-      placeholder="Choose start time"
-    />
+    <ng-container formGroupName="time">
+      <app-time-dropdown
+        name="startTime"
+        formControlName="startTime"
+        label="Start time"
+        placeholder="Choose start time"
+      />
 
-    <app-time-dropdown
-      name="endTime"
-      formControlName="endTime"
-      label="End time"
-      placeholder="Choose end time"
-    />
+      <app-time-dropdown
+        name="endTime"
+        formControlName="endTime"
+        label="End time"
+        placeholder="Choose end time"
+      />
+    </ng-container>
 
     <button
       appButton
       class="w-full"
       type="submit"
+      [disabled]="form.invalid"
     >
       Submit
     </button>

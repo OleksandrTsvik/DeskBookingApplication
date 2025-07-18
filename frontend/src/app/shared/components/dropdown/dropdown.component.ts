@@ -64,11 +64,14 @@ export class DropdownComponent<ValueType> implements ControlValueAccessor {
       return;
     }
 
-    this.value.set(option.value);
     this.isOpen = false;
 
-    this.change.emit(option.value);
-    this.onChangeControl(option.value);
+    if (this.value() !== option.value) {
+      this.value.set(option.value);
+
+      this.change.emit(option.value);
+      this.onChangeControl(option.value);
+    }
   }
 
   writeValue(value: ValueType | undefined): void {
