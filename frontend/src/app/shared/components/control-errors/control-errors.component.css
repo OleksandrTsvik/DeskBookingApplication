@@ -1,0 +1,9 @@
+@reference '#styles.css';
+
+:host {
+  @apply flex flex-col text-(--danger-color);
+}
+
+:host.hidden {
+  @apply hidden;
+}
