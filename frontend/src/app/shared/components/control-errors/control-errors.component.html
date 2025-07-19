@@ -1,7 +1,0 @@
-@if (formControl?.dirty) {
-  @for (error of errorMessages; track error.code) {
-    @if (formControl?.hasError(error.code)) {
-      <span>{{ error.message }}</span>
-    }
-  }
-}

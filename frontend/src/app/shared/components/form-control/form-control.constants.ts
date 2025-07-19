@@ -1,8 +1,8 @@
 import { ValidationErrors } from '@angular/forms';
 
 export const DEFAULT_ERROR_MESSAGES: ValidationErrors = {
-  required: 'This is a required field.',
+  required: 'This field is required.',
   email: 'Email format is invalid.',
-  incompleteDate: 'incompleteDate',
-  invalidRange: 'invalidRange',
+  incompleteDate: 'Please complete all parts of the date.',
+  invalidRange: 'The selected range is invalid.',
 };

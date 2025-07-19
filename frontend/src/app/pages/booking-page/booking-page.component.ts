@@ -8,6 +8,7 @@ import { CheckboxGroupComponent } from '@/shared/components/checkbox/checkbox-gr
 import { CheckboxComponent } from '@/shared/components/checkbox/checkbox.component';
 import { DatePickerComponent } from '@/shared/components/date-picker/date-picker.component';
 import { DropdownComponent, DropdownOption } from '@/shared/components/dropdown/dropdown.component';
+import { FormControlComponent } from '@/shared/components/form-control/form-control.component';
 import { InputComponent } from '@/shared/components/input/input.component';
 import { TimeDropdownComponent, TimeDropdownValue } from '@/shared/components/time-dropdown/time-dropdown.component';
 import { Nullable } from '@/shared/models/common.models';
@@ -29,6 +30,7 @@ import { BookingPageService } from './booking-page.service';
     CheckboxComponent,
     DatePickerComponent,
     DropdownComponent,
+    FormControlComponent,
     InputComponent,
     TimeDropdownComponent,
   ],

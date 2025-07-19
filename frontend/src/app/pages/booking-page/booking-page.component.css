@@ -19,11 +19,12 @@
   padding: 40px;
 }
 
-.section:nth-child(1) {
+.section.section_details {
   gap: 40px;
 }
 
-.section:nth-child(2) {
+.section.section_datetime,
+.datetime_group {
   gap: 32px;
 }
 
@@ -31,4 +32,8 @@
   @apply font-bold;
 
   font-size: 32px;
+}
+
+.datetime_group {
+  @apply flex flex-col;
 }
