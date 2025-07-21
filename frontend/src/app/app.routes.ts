@@ -9,11 +9,28 @@ export const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    title: 'Desk Booking',
     children: [
-      { path: '', redirectTo: '/workspaces', pathMatch: 'full' },
-      { path: 'workspaces', component: HomePageComponent },
-      { path: 'workspaces/book', component: BookingPageComponent },
-      { path: '**', component: NotFoundPageComponent },
+      {
+        path: '',
+        redirectTo: '/workspaces',
+        pathMatch: 'full',
+      },
+      {
+        path: 'workspaces',
+        component: HomePageComponent,
+        title: 'Coworking Details',
+      },
+      {
+        path: 'workspaces/book',
+        component: BookingPageComponent,
+        title: 'Booking Form',
+      },
+      {
+        path: '**',
+        component: NotFoundPageComponent,
+        title: 'Page not found',
+      },
     ],
   },
 ];

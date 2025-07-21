@@ -1,5 +1,5 @@
 import { NgPlural, NgPluralCase } from '@angular/common';
-import { Component, DestroyRef, OnInit, computed, inject, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, computed, inject, input, signal } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
 import { PageTitleComponent } from '@/features/page-title/page-title.component';
@@ -42,6 +42,8 @@ export class BookingPageComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
 
   private bookingPageService = inject(BookingPageService);
+
+  workspaceType = input<string>();
 
   form = this.formBuilder.group({
     name: ['', Validators.required],
@@ -90,40 +92,8 @@ export class BookingPageComponent implements OnInit {
   roomCapacities = signal<number[] | null>(null);
 
   ngOnInit(): void {
-    this.isFetching.set(true);
-
-    const loadBookableWorkspacesSubscription = this.bookingPageService.loadBookableWorkspaces().subscribe({
-      next: (response) => this.bookableWorkspaces.set(response),
-      complete: () => this.isFetching.set(false),
-      error: () => this.isFetching.set(false),
-    });
-
-    this.destroyRef.onDestroy(() => {
-      loadBookableWorkspacesSubscription.unsubscribe();
-    });
-  }
-
-  onWorkspaceTypeIdChange(workspaceTypeId: string): void {
-    const selectedWorkspace = this.bookableWorkspaces().find((workspace) => workspace.id === workspaceTypeId);
-
-    this.updateDeskCountOptions(selectedWorkspace?.deskCount);
-    this.updateRoomCapacities(selectedWorkspace?.roomCapacities);
-
-    this.setOrClearControlValidators(
-      this.form.controls.deskCount,
-      selectedWorkspace && selectedWorkspace.deskCount > 0,
-      Validators.required,
-    );
-
-    this.setOrClearControlValidators(
-      this.form.controls.roomSize,
-      selectedWorkspace && selectedWorkspace.roomCapacities.length > 0,
-      Validators.required,
-    );
-
-    if (this.form.value.workspaceTypeId !== workspaceTypeId) {
-      this.form.patchValue({ deskCount: null, roomSize: null });
-    }
+    this.subscribeToLoadBookableWorkspaces();
+    this.subscribeToWorkspaceTypeIdChanges();
   }
 
   onSubmit(): void {
@@ -148,6 +118,55 @@ export class BookingPageComponent implements OnInit {
     };
 
     console.log(values);
+  }
+
+  private subscribeToLoadBookableWorkspaces() {
+    this.isFetching.set(true);
+
+    const subscription = this.bookingPageService.loadBookableWorkspaces().subscribe({
+      next: (response) => {
+        this.bookableWorkspaces.set(response);
+
+        const initWorkspaceTypeId = response.find((workspace) => workspace.name === this.workspaceType())?.id;
+
+        this.form.patchValue({ workspaceTypeId: initWorkspaceTypeId });
+      },
+      complete: () => this.isFetching.set(false),
+      error: () => this.isFetching.set(false),
+    });
+
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
+  }
+
+  private subscribeToWorkspaceTypeIdChanges() {
+    const subscription = this.form.controls.workspaceTypeId.valueChanges.subscribe((value) => {
+      this.handleWorkspaceTypeIdChange(value);
+    });
+
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
+  }
+
+  private handleWorkspaceTypeIdChange(workspaceTypeId: string | null): void {
+    const selectedWorkspace = this.bookableWorkspaces().find((workspace) => workspace.id === workspaceTypeId);
+
+    this.updateDeskCountOptions(selectedWorkspace?.deskCount);
+    this.updateRoomCapacities(selectedWorkspace?.roomCapacities);
+
+    this.setOrClearControlValidators(
+      this.form.controls.deskCount,
+      selectedWorkspace && selectedWorkspace.deskCount > 0,
+      Validators.required,
+    );
+
+    this.setOrClearControlValidators(
+      this.form.controls.roomSize,
+      selectedWorkspace && selectedWorkspace.roomCapacities.length > 0,
+      Validators.required,
+    );
+
+    if (this.form.value.workspaceTypeId !== workspaceTypeId) {
+      this.form.patchValue({ deskCount: null, roomSize: null });
+    }
   }
 
   private updateDeskCountOptions(deskCount: number | undefined): void {
