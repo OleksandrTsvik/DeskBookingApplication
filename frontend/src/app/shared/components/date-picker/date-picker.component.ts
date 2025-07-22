@@ -39,7 +39,6 @@ export class DatePickerComponent implements ControlValueAccessor, Validator, OnI
   name = input<string>();
   label = input<string>();
   type = input<'past' | 'future' | 'all'>('future');
-  disabled = input(false);
 
   dayOptions: DropdownOption<number>[] = [];
   monthOptions: DropdownOption<number>[] = [];
@@ -50,7 +49,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator, OnI
   selectedYear?: number;
 
   isTouched = false;
-  isDisabled = this.disabled();
+  isDisabled = false;
 
   private currentDate = new Date();
   private currentDay = this.currentDate.getDate();

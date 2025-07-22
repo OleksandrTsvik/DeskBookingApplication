@@ -1,0 +1,77 @@
+@font-face {
+  font-style: normal;
+  font-weight: normal;
+  src: url('@/assets/fonts/icons.eot?lofxkw');
+  src:
+    url('@/assets/fonts/icons.eot?lofxkw#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/icons.ttf?lofxkw') format('truetype'),
+    url('@/assets/fonts/icons.woff?lofxkw') format('woff'),
+    url('@/assets/fonts/icons.svg?lofxkw#icons') format('svg');
+  font-family: 'icons';
+  font-display: block;
+}
+
+[class^='icon-']::before,
+[class*=' icon-']::before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icons' !important;
+  speak: never;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1;
+  text-transform: none;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-air-conditioning:before {
+  content: '\e900';
+}
+.icon-armchair:before {
+  content: '\e901';
+}
+.icon-calendar:before {
+  content: '\e902';
+}
+.icon-check:before {
+  content: '\e903';
+}
+.icon-chevron:before {
+  content: '\e904';
+}
+.icon-chevron-left:before {
+  content: '\e905';
+}
+.icon-clock-hour-3:before {
+  content: '\e906';
+}
+.icon-coffee:before {
+  content: '\e907';
+}
+.icon-device-gamepad:before {
+  content: '\e908';
+}
+.icon-edit:before {
+  content: '\e909';
+}
+.icon-headphones:before {
+  content: '\e90a';
+}
+.icon-microphone:before {
+  content: '\e90b';
+}
+.icon-trash:before {
+  content: '\e90c';
+}
+.icon-user:before {
+  content: '\e90d';
+}
+.icon-wifi:before {
+  content: '\e90e';
+}
+.icon-x:before {
+  content: '\e90f';
+}

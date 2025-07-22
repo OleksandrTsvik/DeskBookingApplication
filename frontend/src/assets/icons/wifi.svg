@@ -1,3 +1,40 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" id="wifi">
-<path d="M12 18.0002H12.01M9.172 15.1722C9.92211 14.4224 10.9393 14.0011 12 14.0011C13.0607 14.0011 14.0779 14.4224 14.828 15.1722M6.34299 12.3432C7.08586 11.6003 7.96779 11.011 8.93842 10.6089C9.90906 10.2069 10.9494 9.99994 12 9.99994C13.0506 9.99994 14.0909 10.2069 15.0616 10.6089C16.0322 11.011 16.9141 11.6003 17.657 12.3432M3.51501 9.51525C8.20101 4.82825 15.799 4.82825 20.515 9.51525" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="18.999706"
+   height="13.994141"
+   viewBox="0 0 18.999706 13.994141"
+   fill="none"
+   id="wifi"
+   version="1.1"
+   sodipodi:docname="wifi.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="33.125"
+     inkscape:cx="9.4943396"
+     inkscape:cy="6.9886792"
+     inkscape:window-width="1920"
+     inkscape:window-height="1013"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="wifi" />
+  <path
+     style="baseline-shift:baseline;display:inline;overflow:visible;opacity:1;vector-effect:none;fill:currentColor;stroke-linecap:round;stroke-linejoin:round;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
+     d="M 9.4881297,0 C 6.1557358,1.0670673e-4 2.8268836,1.2681274 0.29281755,3.8027344 a 1,1 0 0 0 0,1.4140622 1,1 0 0 0 1.41406235,0 c 4.3038677,-4.30478579 11.2527951,-4.30648479 15.5878911,0.002 a 1,1 0 0 0 1.414062,-0.0039 1,1 0 0 0 -0.0039,-1.4140624 C 16.156475,1.2680003 12.820524,-1.0669327e-4 9.4881297,0 Z m -0.00391,3.9941406 c -1.181928,0 -2.3514394,0.2333176 -3.4433594,0.6855469 C 4.9489461,5.1320336 3.9566655,5.7951026 3.1209424,6.6308596 a 1,1 0 0 0 0,1.414062 1,1 0 0 0 1.4140625,0 c 0.650017,-0.650043 1.4201896,-1.165724 2.2695313,-1.517578 0.8493605,-0.351771 1.7604155,-0.533203 2.6796875,-0.533203 0.9192723,0 1.8302403,0.181418 2.6796883,0.533203 0.849309,0.351852 1.619465,0.867512 2.269531,1.517578 a 1,1 0 0 0 1.414062,0 1,1 0 0 0 0,-1.414062 C 15.011771,5.7951256 14.019474,5.1320356 12.927583,4.6796875 11.835631,4.2274727 10.666152,3.9941406 9.4842237,3.9941406 Z m 0,4.001953 c -1.325494,0 -2.5978196,0.525941 -3.5351562,1.462891 a 1,1 0 0 0 0,1.4140624 1,1 0 0 0 1.4140625,0 c 0.5628837,-0.56265 1.3251877,-0.8769534 2.1210937,-0.8769534 0.7959063,0 1.5582273,0.3143114 2.1210943,0.8769534 a 1,1 0 0 0 1.414062,0 1,1 0 0 0 0,-1.4140624 C 12.082047,8.5220266 10.809718,7.9960936 9.4842237,7.9960936 Z m 0,3.9980474 a 1,1 0 0 0 -1,1 1,1 0 0 0 1,1 h 0.0098 a 1,1 0 0 0 1.0000003,-1 1,1 0 0 0 -1.0000003,-1 z"
+     id="path1" />
 </svg>

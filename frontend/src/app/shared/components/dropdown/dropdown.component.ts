@@ -1,4 +1,15 @@
-import { Component, ElementRef, HostListener, Input, computed, inject, input, model, output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnInit,
+  computed,
+  inject,
+  input,
+  model,
+  output,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { CompareFn, OnChangeControlFn, OnTouchedControlFn } from '@/shared/models/form.models';
@@ -23,7 +34,7 @@ export type DropdownOption<ValueType> = {
     },
   ],
 })
-export class DropdownComponent<ValueType> implements ControlValueAccessor {
+export class DropdownComponent<ValueType> implements ControlValueAccessor, OnInit {
   private elementRef = inject(ElementRef);
 
   name = input<string>();
@@ -42,10 +53,14 @@ export class DropdownComponent<ValueType> implements ControlValueAccessor {
   option = computed(() => this.options()?.find((option) => this.compareWith(option.value, this.value())));
   isOpen = false;
   isTouched = false;
-  isDisabled = this.disabled();
+  isDisabled = false;
 
   private onChangeControl: OnChangeControlFn<ValueType | undefined> = () => {};
   private onTouchedControl: OnTouchedControlFn = () => {};
+
+  ngOnInit(): void {
+    this.isDisabled = this.disabled();
+  }
 
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event): void {

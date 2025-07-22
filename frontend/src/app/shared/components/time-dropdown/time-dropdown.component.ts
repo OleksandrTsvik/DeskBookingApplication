@@ -30,13 +30,12 @@ export class TimeDropdownComponent implements ControlValueAccessor, OnInit {
   label = input<string>();
   type = input<'past' | 'future' | 'all'>('all');
   placeholder = input<string>();
-  disabled = input(false);
 
   options: DropdownOption<TimeDropdownValue>[] = [];
 
   value?: TimeDropdownValue;
   isTouched = false;
-  isDisabled = this.disabled();
+  isDisabled = false;
 
   private currentDate = new Date();
   private currentHours = this.currentDate.getHours();

@@ -15,6 +15,8 @@
 - [[Stack Overflow] How to get FormControl instance from ControlValueAccessor](https://stackoverflow.com/q/45755958)
 - [[YouTube] How to create custom form components in Angular with ControlValueAccessor](https://www.youtube.com/watch?v=krw9R77eV44)
 - [[YouTube] Creating custom form controls in Angular (Control Value Accessors)](https://www.youtube.com/watch?v=xTcJQaWiJ2c)
+- [[YouTube] Иконочный шрифт. Подключение Font Awesome. Создание иконочного шрифта из SVG файлов](https://www.youtube.com/watch?v=QYwI3LRCnRE)
+- [[GitHub] Angular Custom Modal](https://github.com/zurfyx/angular-custom-modal)
 - [[Docs] prettier-plugin-organize-attributes](https://github.com/NiklasPor/prettier-plugin-organize-attributes/blob/main/src/presets.ts)
 - [[Docs] prettier-plugin-tailwindcss](https://www.npmjs.com/package/prettier-plugin-tailwindcss)
 

@@ -1,3 +1,40 @@
-<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" id="chevron-left">
-<path d="M12.5 5L7.5 10L12.5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="6.9996562"
+   height="11.999848"
+   viewBox="0 0 6.9996562 11.999848"
+   fill="none"
+   id="chevron-left"
+   version="1.1"
+   sodipodi:docname="chevron-left.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="39.75"
+     inkscape:cx="3.509434"
+     inkscape:cy="6"
+     inkscape:window-width="1920"
+     inkscape:window-height="1013"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="chevron-left" />
+  <path
+     style="baseline-shift:baseline;display:inline;overflow:visible;opacity:1;vector-effect:none;fill:currentColor;stroke-linecap:round;stroke-linejoin:round;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
+     d="M 5.9998074,0 A 1,1 0 0 0 5.2927764,0.2929687 L 0.29277615,5.2929688 a 1.0001,1.0001 0 0 0 0,1.4140622 l 5.00000025,5 a 1,1 0 0 0 1.414062,0 1,1 0 0 0 0,-1.414062 L 2.4138699,6 6.7068384,1.7070312 a 1,1 0 0 0 0,-1.4140625 A 1,1 0 0 0 5.9998074,0 Z"
+     id="path1" />
 </svg>
