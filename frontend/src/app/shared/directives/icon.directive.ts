@@ -9,7 +9,7 @@ export type Icon =
   | 'chevron'
   | 'clock-hour-3'
   | 'coffee'
-  | 'device-gamepad-2'
+  | 'device-gamepad'
   | 'edit'
   | 'headphones'
   | 'microphone'

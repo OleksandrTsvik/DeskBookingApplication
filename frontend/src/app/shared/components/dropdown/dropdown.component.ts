@@ -12,9 +12,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { IconDirective } from '@/shared/directives/icon.directive';
 import { CompareFn, OnChangeControlFn, OnTouchedControlFn } from '@/shared/models/form.models';
-
-import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 
 export type DropdownOption<ValueType> = {
   label: string | number;
@@ -23,7 +22,7 @@ export type DropdownOption<ValueType> = {
 
 @Component({
   selector: 'app-dropdown',
-  imports: [SvgIconComponent],
+  imports: [IconDirective],
   templateUrl: './dropdown.component.html',
   styleUrl: './dropdown.component.css',
   providers: [

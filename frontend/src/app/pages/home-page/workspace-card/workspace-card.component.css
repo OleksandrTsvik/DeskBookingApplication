@@ -1,4 +1,7 @@
 .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 12px;
   background-color: #f5f3fb;
   padding: 10px;

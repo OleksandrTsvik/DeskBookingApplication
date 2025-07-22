@@ -10,14 +10,10 @@
     (blur)="onBlur()"
     (change)="onChange($event)"
   />
-  <span class="icon">
-    <svg
-      height="18"
-      icon="check"
-      viewBox="0 0 12 12"
-      width="18"
-    ></svg>
-  </span>
+  <span
+    appIcon="check"
+    class="icon"
+  ></span>
 </label>
 <label [for]="name()">
   <ng-content />

@@ -1,15 +1,14 @@
 import { Component, inject, input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { IconDirective } from '@/shared/directives/icon.directive';
 import { OnChangeControlFn, OnTouchedControlFn } from '@/shared/models/form.models';
-
-import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 
 import { CheckboxGroupComponent } from './checkbox-group.component';
 
 @Component({
   selector: 'app-checkbox',
-  imports: [SvgIconComponent],
+  imports: [IconDirective],
   templateUrl: './checkbox.component.html',
   styleUrl: './checkbox.component.css',
   providers: [

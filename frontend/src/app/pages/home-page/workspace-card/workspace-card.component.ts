@@ -3,8 +3,8 @@ import { Component, computed, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { ButtonDirective } from '@/shared/components/button/button.directive';
-import { SvgIconComponent } from '@/shared/components/svg-icon/svg-icon.component';
-import { AmenitySvgIconDirective } from '@/shared/directives/amenity-icon.directive';
+import { AmenityIconDirective } from '@/shared/directives/amenity-icon.directive';
+import { IconDirective } from '@/shared/directives/icon.directive';
 
 import { WorkspaceRoomResponse } from '../home-page.models';
 
@@ -12,7 +12,7 @@ const MAX_DISPLAY_PHOTOS = 4;
 
 @Component({
   selector: 'app-workspace-card',
-  imports: [NgPlural, NgPluralCase, RouterLink, ButtonDirective, SvgIconComponent, AmenitySvgIconDirective],
+  imports: [NgPlural, NgPluralCase, RouterLink, ButtonDirective, AmenityIconDirective, IconDirective],
   templateUrl: './workspace-card.component.html',
   styleUrl: './workspace-card.component.css',
   host: {

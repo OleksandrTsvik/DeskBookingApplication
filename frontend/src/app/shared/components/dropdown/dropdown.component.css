@@ -30,11 +30,10 @@
 .icon {
   @apply absolute;
 
-  right: 16px;
-  bottom: 12px;
-  width: 24px;
-  height: 24px;
+  top: 20px;
+  right: 22px;
   color: #354052;
+  font-size: 7px;
 }
 
 .menu {

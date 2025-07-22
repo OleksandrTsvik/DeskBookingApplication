@@ -1,24 +1,24 @@
 import { Directive, TemplateRef, ViewContainerRef, effect, inject, input } from '@angular/core';
 
-import { SvgIcon } from '../components/svg-icon/svg-icon.component';
+import { Icon } from './icon.directive';
 
-const amenityIconMap: Record<string, SvgIcon> = {
+const amenityIconMap: Record<string, Icon> = {
   'Air conditioning': 'air-conditioning',
   'Wi-Fi': 'wifi',
   Coffee: 'coffee',
-  Gamepad: 'device-gamepad-2',
+  Gamepad: 'device-gamepad',
   Headphones: 'headphones',
   Microphone: 'microphone',
 };
 
 @Directive({
-  selector: '[appAmenitySvgIcon]',
+  selector: '[appAmenityIcon]',
 })
-export class AmenitySvgIconDirective {
+export class AmenityIconDirective {
   private templateRef = inject(TemplateRef);
   private viewContainerRef = inject(ViewContainerRef);
 
-  amenity = input.required<string>({ alias: 'appAmenitySvgIcon' });
+  amenity = input.required<string>({ alias: 'appAmenityIcon' });
 
   constructor() {
     effect(() => {
