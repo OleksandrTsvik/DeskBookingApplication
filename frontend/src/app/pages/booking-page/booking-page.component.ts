@@ -10,6 +10,7 @@ import { DatePickerComponent } from '@/shared/components/date-picker/date-picker
 import { DropdownComponent, DropdownOption } from '@/shared/components/dropdown/dropdown.component';
 import { FormControlComponent } from '@/shared/components/form-control/form-control.component';
 import { InputComponent } from '@/shared/components/input/input.component';
+import { ModalComponent } from '@/shared/components/modal/modal.component';
 import { TimeDropdownComponent, TimeDropdownValue } from '@/shared/components/time-dropdown/time-dropdown.component';
 import { Nullable } from '@/shared/models/common.models';
 import { arrayRange } from '@/shared/utils/array.utils';
@@ -33,6 +34,7 @@ import { BookingPageService } from './booking-page.service';
     FormControlComponent,
     InputComponent,
     TimeDropdownComponent,
+    ModalComponent,
   ],
   templateUrl: './booking-page.component.html',
   styleUrl: './booking-page.component.css',

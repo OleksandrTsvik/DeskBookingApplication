@@ -135,3 +135,41 @@
     </button>
   </div>
 </form>
+
+<app-modal
+  heading="You're all set!"
+  [visible]="false"
+>
+  <ng-template #modalBody>
+    Your room for 2 people is booked from
+    <span class="font-semibold text-(--text-color)">May 18, 2025 to May 23, 2025</span>. A confirmation has been sent to
+    your email <span class="font-semibold text-(--text-color)">maxim.lazar&#x40;gmail.com</span>
+  </ng-template>
+  <ng-template #modalFooter>
+    <button
+      appButton
+      class="w-full"
+    >
+      My bookings
+    </button>
+  </ng-template>
+</app-modal>
+
+<app-modal
+  #modal
+  heading="Selected time is not available"
+  icon="x"
+  status="danger"
+  [visible]="true"
+>
+  <ng-template #modalBody>Please choose a different time slot</ng-template>
+  <ng-template #modalFooter>
+    <button
+      appButton
+      class="w-full"
+      (click)="modal.close()"
+    >
+      Check availability
+    </button>
+  </ng-template>
+</app-modal>

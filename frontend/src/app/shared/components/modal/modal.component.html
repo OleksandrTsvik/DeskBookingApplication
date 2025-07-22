@@ -1,0 +1,48 @@
+@if (visible()) {
+  <div
+    class="modal-backdrop"
+    aria-hidden="true"
+  ></div>
+
+  <div class="modal-wrapper">
+    <div class="modal-box">
+      <div
+        #modalContent
+        class="modal-content"
+      >
+        <div class="modal-close">
+          <button
+            appIcon="x"
+            type="button"
+            (click)="close()"
+          ></button>
+        </div>
+        <div class="modal-icon">
+          <span
+            [appIcon]="icon()"
+            [class.bg-(--danger-color)]="status() === 'danger'"
+            [class.bg-(--success-bg-500)]="status() === 'success'"
+          ></span>
+        </div>
+        <div class="modal-header">
+          @if (heading(); as heading) {
+            <h4 class="modal-heading">{{ heading }}</h4>
+          }
+          @if (header(); as header) {
+            <ng-container *ngTemplateOutlet="header" />
+          }
+        </div>
+        @if (body(); as body) {
+          <div class="modal-body">
+            <ng-container *ngTemplateOutlet="body" />
+          </div>
+        }
+        @if (footer(); as footer) {
+          <div class="modal-footer">
+            <ng-container *ngTemplateOutlet="footer" />
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}
