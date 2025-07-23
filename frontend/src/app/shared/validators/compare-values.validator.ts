@@ -1,20 +1,29 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-import { isNullable } from '../utils/type-guards';
+import { Nullable } from '../models/common.models';
+import { isNonNullable, isNullable } from '../utils/type-guards';
 
-export function compareValuesValidator<T>(
-  controlName1: string,
-  controlName2: string,
-  comparator: (controlValue1: T, controlValue2: T) => boolean,
+export function compareValuesValidator<ValueTypes extends unknown[]>(
+  controlPaths: string[],
+  comparator: (...controlValues: ValueTypes) => boolean,
 ): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
-    const value1 = control.get(controlName1)?.value;
-    const value2 = control.get(controlName2)?.value;
+    const controlValues = controlPaths.map((controlPath) => {
+      let currentControl: Nullable<AbstractControl> = control;
+      let childControl: Nullable<AbstractControl> = currentControl.get(controlPath);
 
-    if (isNullable(value1) || isNullable(value2)) {
+      while (isNonNullable(currentControl) && isNullable(childControl)) {
+        currentControl = currentControl.parent;
+        childControl = currentControl?.get(controlPath);
+      }
+
+      return childControl?.value;
+    }) as ValueTypes;
+
+    if (controlValues.some(isNullable)) {
       return null;
     }
 
-    return comparator(value1, value2) ? null : { invalidRange: true };
+    return comparator(...controlValues) ? null : { invalidRange: true };
   };
 }

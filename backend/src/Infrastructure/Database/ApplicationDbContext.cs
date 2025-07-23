@@ -1,4 +1,5 @@
 using System.Reflection;
+using Domain.Bookings;
 using Domain.Workspaces;
 using Microsoft.EntityFrameworkCore;
 

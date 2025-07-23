@@ -20,6 +20,8 @@ public class SeedOptionsValidator : AbstractValidator<SeedOptions>
                 .MinimumLength(WorkspaceRules.MinDescriptionLength)
                 .MaximumLength(WorkspaceRules.MaxDescriptionLength);
 
+            workspace.RuleFor(x => x.MaxBookingDurationInDays).GreaterThan(0);
+
             workspace.RuleFor(x => x.PhotoUrls).NotNull();
             workspace.RuleForEach(x => x.PhotoUrls).NotEmpty();
 

@@ -1,4 +1,4 @@
-namespace Domain.Workspaces;
+namespace Domain.Bookings;
 
 public static class BookingRules
 {

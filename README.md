@@ -42,3 +42,9 @@ docker logs backend --follow
 ```sh
 docker exec -it backend bash
 ```
+
+## 🔗 Local Development Links
+
+- Backend: [http://localhost:5000/api](http://localhost:5000/api)
+- Frontend: [http://localhost:4200](http://localhost:4200)
+- pgAdmin 4: [http://localhost:5050](http://localhost:5050)

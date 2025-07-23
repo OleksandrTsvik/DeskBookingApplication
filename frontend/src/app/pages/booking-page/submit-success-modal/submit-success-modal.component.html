@@ -1,0 +1,21 @@
+<app-modal
+  heading="You're all set!"
+  [(visible)]="visible"
+>
+  <ng-template #modalBody>
+    Your {{ roomOptions() }} is booked from
+    <span class="font-semibold text-(--text-color)">
+      {{ startDate() | date: 'longDate' }} to {{ endDate() | date: 'longDate' }}</span
+    >. A confirmation has been sent to your email
+    <span class="font-semibold text-(--text-color)">{{ email() }}</span>
+  </ng-template>
+  <ng-template #modalFooter>
+    <a
+      appButton
+      routerLink="/bookings/my"
+      class="w-full"
+    >
+      My bookings
+    </a>
+  </ng-template>
+</app-modal>

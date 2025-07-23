@@ -3,6 +3,7 @@
 ## backend
 
 - [The .NET Weekly Newsletter | Milan Jovanović](https://www.milanjovanovic.tech/blog)
+- [Filtering Results Using Filtered Include Method in EF Core](https://code-maze.com/ef-core-filtered-include/)
 
 ## frontend
 
@@ -12,6 +13,7 @@
 - [Angular Custom Form Controls: Complete Guide](https://blog.angular-university.io/angular-custom-form-controls/)
 - [Strongly Typed Reactive Forms in Angular](https://angular.love/strongly-typed-reactive-forms-in-angular)
 - [Inject Control in ControlValueAccessor](https://medium.com/@toha.marko/get-actual-control-in-controlvalueaccessor-e5bb3bb6710)
+- [The filter(Boolean) Trick](https://michaeluloth.com/javascript-filter-boolean/)
 - [[Stack Overflow] How to get FormControl instance from ControlValueAccessor](https://stackoverflow.com/q/45755958)
 - [[YouTube] How to create custom form components in Angular with ControlValueAccessor](https://www.youtube.com/watch?v=krw9R77eV44)
 - [[YouTube] Creating custom form controls in Angular (Control Value Accessors)](https://www.youtube.com/watch?v=xTcJQaWiJ2c)
@@ -19,6 +21,7 @@
 - [[GitHub] Angular Custom Modal](https://github.com/zurfyx/angular-custom-modal)
 - [[Docs] prettier-plugin-organize-attributes](https://github.com/NiklasPor/prettier-plugin-organize-attributes/blob/main/src/presets.ts)
 - [[Docs] prettier-plugin-tailwindcss](https://www.npmjs.com/package/prettier-plugin-tailwindcss)
+- [[Docs] IcoMoon App](https://icomoon.io/docs#app)
 
 ## General
 

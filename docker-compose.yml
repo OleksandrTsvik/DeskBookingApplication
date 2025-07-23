@@ -1,3 +1,5 @@
+name: desk-booking-app
+
 services:
   backend:
     container_name: backend

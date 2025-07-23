@@ -1,0 +1,39 @@
+@reference '#styles.css';
+
+.form {
+  @apply grid items-start;
+
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 30px;
+
+  @variant xl {
+    grid-template-columns: 3fr 1.92fr;
+  }
+}
+
+.section {
+  @apply flex flex-col items-start;
+
+  border-radius: 20px;
+  background: #ffffff;
+  padding: 40px;
+}
+
+.section.section_details {
+  gap: 40px;
+}
+
+.section.section_datetime,
+.datetime_group {
+  gap: 32px;
+}
+
+.section__title {
+  @apply font-bold;
+
+  font-size: 32px;
+}
+
+.datetime_group {
+  @apply flex flex-col;
+}

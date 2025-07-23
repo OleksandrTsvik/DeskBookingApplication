@@ -1,4 +1,4 @@
-using Domain.Workspaces;
+using Domain.Bookings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -30,20 +30,17 @@ public sealed class BookingConfiguration : IEntityTypeConfiguration<Booking>
 
         builder
             .HasOne(booking => booking.Workspace)
-            .WithOne()
-            .HasForeignKey<Booking>(booking => booking.WorkspaceId)
-            .IsRequired();
+            .WithMany(workspace => workspace.Bookings)
+            .HasForeignKey(booking => booking.WorkspaceId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder
-            .HasOne(booking => booking.Desk)
-            .WithOne()
-            .HasForeignKey<Booking>(booking => booking.DeskId)
-            .IsRequired(false);
+            .HasMany(booking => booking.Desks)
+            .WithMany();
 
         builder
             .HasOne(booking => booking.Room)
             .WithOne()
-            .HasForeignKey<Booking>(booking => booking.RoomId)
-            .IsRequired(false);
+            .HasForeignKey<Booking>(booking => booking.RoomId);
     }
 }

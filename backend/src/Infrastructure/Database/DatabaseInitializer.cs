@@ -110,6 +110,7 @@ public sealed class DatabaseInitializer
         {
             Name = workspaceSeed.Name,
             Description = workspaceSeed.Description,
+            MaxBookingDuration = TimeSpan.FromDays(workspaceSeed.MaxBookingDurationInDays),
             Photos = photos,
             Amenities = amenities,
             Desks = desks,

@@ -3,173 +3,18 @@
   text="Book your workspace"
 />
 
-<form
-  class="form"
-  [formGroup]="form"
-  (ngSubmit)="onSubmit()"
->
-  <div class="section section_details">
-    <h3 class="section__title">Reservation details</h3>
+<app-booking-form
+  [initWorkspaceTypeName]="workspaceType()"
+  (submit)="onSubmit($event)"
+/>
 
-    <app-form-control>
-      <app-input
-        name="name"
-        formControlName="name"
-        label="Name"
-      />
-    </app-form-control>
+<app-submit-success-modal
+  [deskCount]="submittedFormData()?.deskCount"
+  [email]="submittedFormData()?.email"
+  [endDate]="submittedFormData()?.endTime"
+  [roomCapacity]="submittedFormData()?.roomCapacity"
+  [startDate]="submittedFormData()?.startTime"
+  [(visible)]="showSubmitSuccessModal"
+/>
 
-    <app-form-control>
-      <app-input
-        name="email"
-        formControlName="email"
-        label="Email"
-      />
-    </app-form-control>
-
-    <app-form-control>
-      <app-dropdown
-        name="workspaceType"
-        formControlName="workspaceTypeId"
-        label="Workspace type"
-        placeholder="Choose your workspace"
-        [options]="workspaceTypeOptions()"
-      />
-    </app-form-control>
-
-    @if (roomCapacities()?.length) {
-      <app-form-control errorClass="mt-3">
-        <app-checkbox-group
-          formControlName="roomSize"
-          label="What room size do you need?"
-          [single]="true"
-        >
-          @for (capacity of roomCapacities(); track capacity) {
-            <app-checkbox
-              name="roomCapacity-{{ $index }}"
-              [value]="capacity"
-            >
-              Room for
-              <span
-                class="font-semibold"
-                [ngPlural]="capacity"
-              >
-                <ng-template ngPluralCase="=1">1 person</ng-template>
-                <ng-template ngPluralCase="other">{{ capacity }} people</ng-template>
-              </span>
-            </app-checkbox>
-          }
-        </app-checkbox-group>
-      </app-form-control>
-    }
-
-    @if (deskCountOptions()?.length) {
-      <app-form-control>
-        <app-dropdown
-          name="deskCount"
-          formControlName="deskCount"
-          label="How many desks do you need?"
-          placeholder="Choose number of desks"
-          [options]="deskCountOptions()!"
-        />
-      </app-form-control>
-    }
-  </div>
-
-  <div class="section section_datetime">
-    <h3 class="section__title">Choose date and time</h3>
-
-    <app-form-control
-      class="datetime_group"
-      errorClass="font-semibold"
-      formGroupName="date"
-    >
-      <app-form-control>
-        <app-date-picker
-          name="startDate"
-          formControlName="startDate"
-          label="Start date"
-        />
-      </app-form-control>
-
-      <app-form-control>
-        <app-date-picker
-          name="endDate"
-          formControlName="endDate"
-          label="End date"
-        />
-      </app-form-control>
-    </app-form-control>
-
-    <app-form-control
-      class="datetime_group"
-      errorClass="font-semibold"
-      formGroupName="time"
-    >
-      <app-form-control>
-        <app-time-dropdown
-          name="startTime"
-          formControlName="startTime"
-          label="Start time"
-          placeholder="Choose start time"
-        />
-      </app-form-control>
-
-      <app-form-control>
-        <app-time-dropdown
-          name="endTime"
-          formControlName="endTime"
-          label="End time"
-          placeholder="Choose end time"
-        />
-      </app-form-control>
-    </app-form-control>
-
-    <button
-      appButton
-      class="w-full"
-      type="submit"
-      [disabled]="form.invalid"
-    >
-      Submit
-    </button>
-  </div>
-</form>
-
-<app-modal
-  heading="You're all set!"
-  [visible]="false"
->
-  <ng-template #modalBody>
-    Your room for 2 people is booked from
-    <span class="font-semibold text-(--text-color)">May 18, 2025 to May 23, 2025</span>. A confirmation has been sent to
-    your email <span class="font-semibold text-(--text-color)">maxim.lazar&#x40;gmail.com</span>
-  </ng-template>
-  <ng-template #modalFooter>
-    <button
-      appButton
-      class="w-full"
-    >
-      My bookings
-    </button>
-  </ng-template>
-</app-modal>
-
-<app-modal
-  #modal
-  heading="Selected time is not available"
-  icon="x"
-  status="danger"
-  [visible]="true"
->
-  <ng-template #modalBody>Please choose a different time slot</ng-template>
-  <ng-template #modalFooter>
-    <button
-      appButton
-      class="w-full"
-      (click)="modal.close()"
-    >
-      Check availability
-    </button>
-  </ng-template>
-</app-modal>
+<app-submit-error-modal [(visible)]="showSubmitErrorModal" />
