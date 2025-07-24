@@ -4,6 +4,7 @@
 
 - [The .NET Weekly Newsletter | Milan Jovanović](https://www.milanjovanovic.tech/blog)
 - [Filtering Results Using Filtered Include Method in EF Core](https://code-maze.com/ef-core-filtered-include/)
+- [[Docs] Eager Loading of Related Data](https://learn.microsoft.com/en-us/ef/core/querying/related-data/eager)
 
 ## frontend
 
@@ -14,6 +15,7 @@
 - [Strongly Typed Reactive Forms in Angular](https://angular.love/strongly-typed-reactive-forms-in-angular)
 - [Inject Control in ControlValueAccessor](https://medium.com/@toha.marko/get-actual-control-in-controlvalueaccessor-e5bb3bb6710)
 - [The filter(Boolean) Trick](https://michaeluloth.com/javascript-filter-boolean/)
+- [Handling Observables with NgIf and the Async Pipe](https://ultimatecourses.com/blog/angular-ngif-async-pipe)
 - [[Stack Overflow] How to get FormControl instance from ControlValueAccessor](https://stackoverflow.com/q/45755958)
 - [[YouTube] How to create custom form components in Angular with ControlValueAccessor](https://www.youtube.com/watch?v=krw9R77eV44)
 - [[YouTube] Creating custom form controls in Angular (Control Value Accessors)](https://www.youtube.com/watch?v=xTcJQaWiJ2c)

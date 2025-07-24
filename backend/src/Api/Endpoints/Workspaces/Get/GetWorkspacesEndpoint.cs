@@ -29,7 +29,15 @@ public sealed class GetWorkspacesEndpoint : IEndpoint
                     .Select(groupedRooms => new WorkspaceRoomResponse(
                         groupedRooms.Count(),
                         groupedRooms.Key))
-                    .ToList()))
+                    .ToList(),
+                workspace.Bookings
+                    .Where(booking => booking.EndTime > DateTime.UtcNow)
+                    .Select(booking => new UserBookingResponse(
+                        booking.Desks.Count,
+                        booking.Room!.Capacity,
+                        booking.StartTime,
+                        booking.EndTime))
+                    .FirstOrDefault()))
             .ToListAsync(cancellationToken);
 
         return TypedResults.Ok(workspaces);

@@ -21,8 +21,15 @@ public class BookWorkspaceEndpoint : IEndpoint
         CancellationToken cancellationToken)
     {
         Workspace? workspace = await dbContext.Workspaces
+            .AsSplitQuery()
             .Include(workspace => workspace.Desks)
             .Include(workspace => workspace.Rooms)
+            .Include(workspace => workspace.Bookings
+                .Where(booking => booking.EndTime > DateTime.UtcNow))
+                .ThenInclude(booking => booking.Room)
+            .Include(workspace => workspace.Bookings
+                .Where(booking => booking.EndTime > DateTime.UtcNow))
+                .ThenInclude(booking => booking.Desks)
             .Where(workspace => workspace.Id == request.WorkspaceId)
             .FirstOrDefaultAsync(cancellationToken);
 
@@ -38,35 +45,21 @@ public class BookWorkspaceEndpoint : IEndpoint
             return TypedResults.BadRequest("Booking duration exceeds maximum allowed.");
         }
 
-        bool userHasBooking = await dbContext.Bookings
-            .Where(booking =>
-                booking.WorkspaceId == workspace.Id &&
-                booking.UserEmail == request.Email &&
-                booking.EndTime > DateTime.UtcNow)
-            .AnyAsync(cancellationToken);
+        bool userHasBooking = workspace.Bookings.Count != 0;
 
         if (userHasBooking)
         {
             return TypedResults.BadRequest("You already have an active booking for this workspace.");
         }
 
-        List<Booking> currentBookings = await dbContext.Bookings
-            .AsNoTracking()
-            .Include(workspace => workspace.Desks)
-            .Include(workspace => workspace.Room)
-            .Where(booking =>
-                booking.WorkspaceId == workspace.Id &&
-                booking.EndTime > DateTime.UtcNow)
-            .ToListAsync(cancellationToken);
-
-        List<Desk> availableDesks = GetAvailableDesks(currentBookings, workspace.Desks, request.DeskCount);
+        List<Desk> availableDesks = GetAvailableDesks(workspace.Bookings, workspace.Desks, request.DeskCount);
 
         if (request.DeskCount.HasValue && availableDesks.Count != request.DeskCount.Value)
         {
             return TypedResults.BadRequest("Not enough available desks.");
         }
 
-        Room? availableRoom = GetAvailableRoom(currentBookings, workspace.Rooms, request.RoomCapacity);
+        Room? availableRoom = GetAvailableRoom(workspace.Bookings, workspace.Rooms, request.RoomCapacity);
 
         if (request.RoomCapacity.HasValue && availableRoom is null)
         {

@@ -1,4 +1,4 @@
-import { NgPlural, NgPluralCase } from '@angular/common';
+import { DatePipe, NgPlural, NgPluralCase } from '@angular/common';
 import { Component, computed, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
@@ -6,13 +6,13 @@ import { ButtonDirective } from '@/shared/components/button/button.directive';
 import { AmenityIconDirective } from '@/shared/directives/amenity-icon.directive';
 import { IconDirective } from '@/shared/directives/icon.directive';
 
-import { WorkspaceRoomResponse } from '../home-page.models';
+import { WorkspaceResponse } from '../home-page.models';
 
 const MAX_DISPLAY_PHOTOS = 4;
 
 @Component({
   selector: 'app-workspace-card',
-  imports: [NgPlural, NgPluralCase, RouterLink, ButtonDirective, AmenityIconDirective, IconDirective],
+  imports: [DatePipe, NgPlural, NgPluralCase, RouterLink, ButtonDirective, AmenityIconDirective, IconDirective],
   templateUrl: './workspace-card.component.html',
   styleUrl: './workspace-card.component.css',
   host: {
@@ -20,27 +20,21 @@ const MAX_DISPLAY_PHOTOS = 4;
   },
 })
 export class WorkspaceCardComponent {
-  name = input.required<string>();
-  description = input.required<string>();
-  photos = input.required<string[]>();
-
-  amenities = input<string[]>();
-  deskCount = input<number>();
-  rooms = input<WorkspaceRoomResponse[]>();
+  workspace = input.required<WorkspaceResponse>();
 
   activePhotoIndex = signal(0);
 
-  activePhoto = computed(() => this.photos()[this.activePhotoIndex()]);
-  displayPhotos = computed(() => this.photos().slice(0, MAX_DISPLAY_PHOTOS));
+  activePhoto = computed(() => this.workspace().photos[this.activePhotoIndex()]);
+  displayPhotos = computed(() => this.workspace().photos.slice(0, MAX_DISPLAY_PHOTOS));
 
   capacityRooms = computed(() => {
-    if (!this.rooms()?.length) {
+    const rooms = this.workspace().rooms;
+
+    if (!rooms?.length) {
       return null;
     }
 
-    const capacities = this.rooms()!
-      .map((room) => room.capacity)
-      .sort((a, b) => a - b);
+    const capacities = rooms.map((room) => room.capacity).sort((a, b) => a - b);
 
     if (capacities.length === 1 && capacities[0] === 1) {
       return '1 person';
@@ -54,8 +48,8 @@ export class WorkspaceCardComponent {
   });
 
   displayRooms = computed(() =>
-    this.rooms()
-      ?.slice()
+    this.workspace()
+      .rooms?.slice()
       .sort((a, b) => b.count - a.count),
   );
 

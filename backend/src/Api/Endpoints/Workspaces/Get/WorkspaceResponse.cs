@@ -7,8 +7,15 @@ public sealed record WorkspaceResponse(
     List<string> Photos,
     List<string> Amenities,
     int DeskCount,
-    List<WorkspaceRoomResponse> Rooms);
+    List<WorkspaceRoomResponse> Rooms,
+    UserBookingResponse? UserBooking);
 
 public sealed record WorkspaceRoomResponse(
     int Count,
     int Capacity);
+
+public sealed record UserBookingResponse(
+    int? DeskCount,
+    int? RoomCapacity,
+    DateTime StartTime,
+    DateTime EndTime);
