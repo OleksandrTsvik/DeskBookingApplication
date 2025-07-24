@@ -2,7 +2,7 @@ import { NgPlural, NgPluralCase } from '@angular/common';
 import { Component, DestroyRef, OnInit, computed, inject, input, output, signal } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
-import { ButtonDirective } from '@/shared/components/button/button.directive';
+import { ButtonComponent } from '@/shared/components/button/button.component';
 import { CheckboxGroupComponent } from '@/shared/components/checkbox/checkbox-group.component';
 import { CheckboxComponent } from '@/shared/components/checkbox/checkbox.component';
 import { DatePickerComponent } from '@/shared/components/date-picker/date-picker.component';
@@ -23,7 +23,7 @@ import { BookingPageService } from '../booking-page.service';
     NgPlural,
     NgPluralCase,
     ReactiveFormsModule,
-    ButtonDirective,
+    ButtonComponent,
     CheckboxGroupComponent,
     CheckboxComponent,
     DatePickerComponent,

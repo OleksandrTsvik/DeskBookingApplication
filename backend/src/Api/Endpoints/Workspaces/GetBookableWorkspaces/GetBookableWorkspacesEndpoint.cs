@@ -12,7 +12,7 @@ public sealed class GetBookableWorkspacesEndpoint : IEndpoint
             .WithTags(Tags.Workspaces);
     }
 
-    public async Task<Ok<List<BookableWorkspaceResponse>>> Handler(
+    public static async Task<Ok<List<BookableWorkspaceResponse>>> Handler(
         ApplicationDbContext dbContext,
         CancellationToken cancellationToken)
     {

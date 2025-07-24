@@ -1,11 +1,11 @@
 import { Component, model } from '@angular/core';
 
-import { ButtonDirective } from '@/shared/components/button/button.directive';
+import { ButtonComponent } from '@/shared/components/button/button.component';
 import { ModalComponent } from '@/shared/components/modal/modal.component';
 
 @Component({
   selector: 'app-submit-error-modal',
-  imports: [ButtonDirective, ModalComponent],
+  imports: [ButtonComponent, ModalComponent],
   templateUrl: './submit-error-modal.component.html',
 })
 export class SubmitErrorModalComponent {

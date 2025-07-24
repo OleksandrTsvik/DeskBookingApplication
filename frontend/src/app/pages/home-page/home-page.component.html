@@ -1,9 +1,11 @@
-<app-page-title text="Available workspaces" />
+<app-page-title heading="Available workspaces" />
 
-<div class="flex flex-col gap-6">
-  @for (workspace of workspaces$ | async; track workspace.id) {
-    <app-workspace-card [workspace]="workspace" />
-  } @empty {
-    <p>Loading ...</p>
-  }
-</div>
+@if (workspaces$ | async; as workspaces) {
+  <div class="flex flex-col gap-6">
+    @for (workspace of workspaces; track workspace.id) {
+      <app-workspace-card [workspace]="workspace" />
+    }
+  </div>
+} @else {
+  <p>Loading ...</p>
+}

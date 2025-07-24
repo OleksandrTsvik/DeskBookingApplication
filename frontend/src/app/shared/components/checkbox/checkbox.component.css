@@ -16,7 +16,7 @@
   @apply h-6 w-6 cursor-pointer appearance-none rounded-sm bg-origin-border p-0;
 
   border: 1px solid #c2bcd8;
-  background-color: #f5f3fb;
+  background-color: var(--gray-color-100);
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
 

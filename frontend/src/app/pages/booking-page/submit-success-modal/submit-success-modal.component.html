@@ -3,7 +3,7 @@
   [(visible)]="visible"
 >
   <ng-template #modalBody>
-    Your {{ roomOptions() }} is booked from
+    Your {{ workspaceOptions() }} is booked from
     <span class="font-semibold text-(--text-color)">
       {{ startDate() | date: 'longDate' }} to {{ endDate() | date: 'longDate' }}</span
     >. A confirmation has been sent to your email
@@ -12,7 +12,7 @@
   <ng-template #modalFooter>
     <a
       appButton
-      routerLink="/bookings/my"
+      routerLink="/bookings"
       class="w-full"
     >
       My bookings

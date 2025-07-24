@@ -1,0 +1,13 @@
+@reference '#styles.css';
+
+:host {
+  @apply grid grid-cols-1 gap-4 rounded-xl bg-white p-3 sm:grid-cols-[1.5fr_5fr] sm:gap-8 sm:rounded-[20px] sm:p-4;
+}
+
+.available {
+  @apply flex items-center gap-4 text-xl font-medium;
+}
+
+.icon {
+  @apply inline-flex h-11 w-11 items-center justify-center rounded-xl bg-(--gray-color-100) text-lg text-(--primary-color);
+}

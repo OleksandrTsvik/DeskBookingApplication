@@ -1,0 +1,57 @@
+<img
+  class="aspect-35/24 w-full rounded-xl object-cover sm:rounded-2xl"
+  [alt]="bookedWorkspace().name"
+  [src]="bookedWorkspace().photo"
+/>
+
+<div>
+  <div class="mb-6 flex items-center justify-between">
+    <h4 class="text-[32px] font-bold">{{ workspaceName() }} {{ workspaceOptions() }}</h4>
+    <div class="flex gap-4">
+      <button
+        appButton
+        class="text-lg"
+        icon="edit"
+        variant="outlined"
+      ></button>
+      <button
+        appButton
+        class="text-lg"
+        color="danger"
+        icon="trash"
+        variant="outlined"
+        (click)="onCancelButtonClick(bookedWorkspace().id)"
+      ></button>
+    </div>
+  </div>
+  <div class="flex flex-col gap-3">
+    <div class="available">
+      <span
+        appIcon="calendar"
+        class="icon"
+      ></span>
+      @if (isSameDate()) {
+        {{ bookedWorkspace().startTime | date: 'longDate' }}
+      } @else {
+        {{ bookedWorkspace().startTime | date: 'longDate' }} - {{ bookedWorkspace().endTime | date: 'longDate' }}
+        <span [ngPlural]="durationInDays()">
+          <ng-template ngPluralCase="=1">(1 day)</ng-template>
+          <ng-template ngPluralCase="other">({{ durationInDays() }} days)</ng-template>
+        </span>
+      }
+    </div>
+    <div class="available">
+      <span
+        appIcon="clock-hour-3"
+        class="icon"
+      ></span>
+      from {{ bookedWorkspace().startTime | date: 'shortTime' }} to {{ bookedWorkspace().endTime | date: 'shortTime' }}
+      @if (isSameDate()) {
+        <span [ngPlural]="durationInHours()">
+          <ng-template ngPluralCase="=1">(1 hour)</ng-template>
+          <ng-template ngPluralCase="other">({{ durationInHours() }} hours)</ng-template>
+        </span>
+      }
+    </div>
+  </div>
+</div>

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Api.Endpoints.Bookings.BookWorkspace;
 
-public class BookWorkspaceEndpoint : IEndpoint
+public sealed class BookWorkspaceEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
@@ -15,7 +15,7 @@ public class BookWorkspaceEndpoint : IEndpoint
             .WithTags(Tags.Bookings);
     }
 
-    public async Task<Results<NoContent, BadRequest<string>>> Handler(
+    public static async Task<Results<NoContent, BadRequest<string>>> Handler(
         BookWorkspaceRequest request,
         ApplicationDbContext dbContext,
         CancellationToken cancellationToken)

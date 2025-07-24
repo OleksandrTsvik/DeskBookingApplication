@@ -2,13 +2,13 @@ import { DatePipe, I18nPluralPipe } from '@angular/common';
 import { Component, computed, inject, input, model } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { ButtonDirective } from '@/shared/components/button/button.directive';
+import { ButtonComponent } from '@/shared/components/button/button.component';
 import { ModalComponent } from '@/shared/components/modal/modal.component';
 import { Nullable } from '@/shared/models/common.models';
 
 @Component({
   selector: 'app-submit-success-modal',
-  imports: [DatePipe, RouterLink, ButtonDirective, ModalComponent],
+  imports: [DatePipe, RouterLink, ButtonComponent, ModalComponent],
   templateUrl: './submit-success-modal.component.html',
   providers: [I18nPluralPipe],
 })
@@ -23,7 +23,7 @@ export class SubmitSuccessModalComponent {
 
   visible = model(false);
 
-  roomOptions = computed(() =>
+  workspaceOptions = computed(() =>
     [this.getDeskCountOptionText(), this.getRoomCapacityOptionText()].filter(Boolean).join(', '),
   );
 

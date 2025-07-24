@@ -2,7 +2,7 @@ import { DatePipe, NgPlural, NgPluralCase } from '@angular/common';
 import { Component, computed, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { ButtonDirective } from '@/shared/components/button/button.directive';
+import { ButtonComponent } from '@/shared/components/button/button.component';
 import { AmenityIconDirective } from '@/shared/directives/amenity-icon.directive';
 import { IconDirective } from '@/shared/directives/icon.directive';
 
@@ -12,7 +12,7 @@ const MAX_DISPLAY_PHOTOS = 4;
 
 @Component({
   selector: 'app-workspace-card',
-  imports: [DatePipe, NgPlural, NgPluralCase, RouterLink, ButtonDirective, AmenityIconDirective, IconDirective],
+  imports: [DatePipe, NgPlural, NgPluralCase, RouterLink, ButtonComponent, AmenityIconDirective, IconDirective],
   templateUrl: './workspace-card.component.html',
   styleUrl: './workspace-card.component.css',
   host: {

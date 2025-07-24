@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { ButtonDirective } from '@/shared/components/button/button.directive';
+import { ButtonComponent } from '@/shared/components/button/button.component';
 
 @Component({
   selector: 'app-not-found-page',
-  imports: [RouterLink, ButtonDirective],
+  imports: [RouterLink, ButtonComponent],
   templateUrl: './not-found-page.component.html',
   styleUrl: './not-found-page.component.css',
 })

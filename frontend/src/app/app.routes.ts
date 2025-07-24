@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { LayoutComponent } from '@/layout/layout.component';
 import { BookingPageComponent } from '@/pages/booking-page/booking-page.component';
 import { HomePageComponent } from '@/pages/home-page/home-page.component';
+import { MyBookingsComponent } from '@/pages/my-bookings/my-bookings.component';
 import { NotFoundPageComponent } from '@/pages/not-found-page/not-found-page.component';
 
 export const routes: Routes = [
@@ -20,6 +21,11 @@ export const routes: Routes = [
         path: 'workspaces',
         component: HomePageComponent,
         title: 'Coworking Details',
+      },
+      {
+        path: 'bookings',
+        component: MyBookingsComponent,
+        title: 'My Bookings',
       },
       {
         path: 'workspaces/book',

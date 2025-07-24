@@ -11,6 +11,6 @@ import { IconDirective } from '@/shared/directives/icon.directive';
   styleUrl: './page-title.component.css',
 })
 export class PageTitleComponent {
-  text = input.required<string>();
+  heading = input.required<string>();
   backLink = input<string>();
 }

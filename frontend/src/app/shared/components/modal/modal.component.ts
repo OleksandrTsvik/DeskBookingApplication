@@ -1,5 +1,15 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, ElementRef, HostListener, TemplateRef, contentChild, input, model, viewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  TemplateRef,
+  contentChild,
+  input,
+  model,
+  output,
+  viewChild,
+} from '@angular/core';
 
 import { Icon, IconDirective } from '@/shared/directives/icon.directive';
 
@@ -19,6 +29,7 @@ export class ModalComponent {
   status = input<'success' | 'danger'>('success');
   heading = input<string>();
   visible = model(false);
+  close = output();
 
   header = contentChild<TemplateRef<any>>('modalHeader');
   body = contentChild<TemplateRef<any>>('modalBody');
@@ -26,16 +37,17 @@ export class ModalComponent {
 
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event): void {
-    if (event.target instanceof Node && !this.content()?.nativeElement.contains(event.target)) {
-      this.close();
+    if (this.visible() && event.target instanceof Node && !this.content()?.nativeElement.contains(event.target)) {
+      this.hide();
     }
   }
 
-  open(): void {
+  show(): void {
     this.visible.set(true);
   }
 
-  close(): void {
+  hide(): void {
     this.visible.set(false);
+    this.close.emit();
   }
 }

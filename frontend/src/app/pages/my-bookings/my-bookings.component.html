@@ -1,0 +1,24 @@
+<app-page-title heading="My bookings" />
+
+@if (bookedWorkspaces$ | async; as bookedWorkspaces) {
+  @if (bookedWorkspaces?.length) {
+    <div class="flex flex-col gap-6">
+      @for (bookedWorkspace of bookedWorkspaces; track bookedWorkspace.id) {
+        <app-booking-card
+          [bookedWorkspace]="bookedWorkspace"
+          (cancel)="cancelModalOpen($event)"
+        />
+      }
+    </div>
+
+    <app-cancel-confirm-modal
+      [visible]="bookingIdToCancel()"
+      (cancel)="onCancel()"
+      (close)="cancelModalClose()"
+    />
+  } @else {
+    <app-empty-bookings />
+  }
+} @else {
+  <p>Loading ...</p>
+}

@@ -12,7 +12,7 @@ public sealed class GetWorkspacesEndpoint : IEndpoint
             .WithTags(Tags.Workspaces);
     }
 
-    public async Task<Ok<List<WorkspaceResponse>>> Handler(
+    public static async Task<Ok<List<WorkspaceResponse>>> Handler(
         ApplicationDbContext dbContext,
         CancellationToken cancellationToken)
     {
