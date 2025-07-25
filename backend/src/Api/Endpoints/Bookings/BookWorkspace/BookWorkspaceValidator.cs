@@ -26,8 +26,15 @@ public class BookWorkspaceValidator : AbstractValidator<BookWorkspaceRequest>
             .GreaterThan(0)
             .When(x => x.RoomCapacity.HasValue);
 
+        RuleFor(x => x.StartDate)
+            .GreaterThanOrEqualTo(_ => DateOnly.FromDateTime(DateTime.Now));
+
+        RuleFor(x => x.EndDate)
+            .GreaterThanOrEqualTo(x => x.StartDate);
+
         RuleFor(x => x.StartTime)
-            .GreaterThan(_ => DateTime.UtcNow);
+            .GreaterThan(_ => TimeOnly.FromDateTime(DateTime.Now))
+            .When(x => x.StartDate == DateOnly.FromDateTime(DateTime.Now));
 
         RuleFor(x => x.EndTime)
             .GreaterThan(x => x.StartTime);

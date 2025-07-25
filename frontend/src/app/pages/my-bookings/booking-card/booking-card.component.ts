@@ -3,7 +3,7 @@ import { Component, computed, inject, input, output } from '@angular/core';
 
 import { ButtonComponent } from '@/shared/components/button/button.component';
 import { IconDirective } from '@/shared/directives/icon.directive';
-import { diffDates } from '@/shared/utils/date.utils';
+import { diffDates, timeOnlyToDate } from '@/shared/utils/date.utils';
 
 import { BookedWorkspaceResponse } from '../my-bookings.models';
 
@@ -26,25 +26,20 @@ export class BookingCardComponent {
     [this.getDeskCountOptionText(), this.getRoomCapacityOptionText()].filter(Boolean).join(', '),
   );
 
-  durationInDays = computed(() => {
-    const { startTime, endTime } = this.bookedWorkspace();
-    return diffDates(startTime, endTime, 'day');
-  });
-
-  durationInHours = computed(() => {
-    const { startTime, endTime } = this.bookedWorkspace();
-    return diffDates(endTime, startTime, 'hour');
-  });
-
   isSameDate = computed(() => {
-    const { startTime, endTime } = this.bookedWorkspace();
-
-    return (
-      startTime.getFullYear() === endTime.getFullYear() &&
-      startTime.getMonth() === endTime.getMonth() &&
-      startTime.getDate() === endTime.getDate()
-    );
+    const { startDate, endDate } = this.bookedWorkspace();
+    return startDate === endDate;
   });
+
+  startTime = computed(() => timeOnlyToDate(this.bookedWorkspace().startTime));
+  endTime = computed(() => timeOnlyToDate(this.bookedWorkspace().endTime));
+
+  durationInDays = computed(() => {
+    const { startDate, endDate } = this.bookedWorkspace();
+    return diffDates(new Date(startDate), new Date(endDate), 'day') + 1;
+  });
+
+  durationInHours = computed(() => diffDates(this.startTime(), this.endTime(), 'hour'));
 
   onCancelButtonClick(id: string): void {
     this.cancel.emit(id);

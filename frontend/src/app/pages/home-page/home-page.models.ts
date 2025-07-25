@@ -17,6 +17,6 @@ export interface WorkspaceRoomResponse {
 export interface UserBookingResponse {
   deskCount?: number;
   roomCapacity?: number;
-  startTime: Date;
-  endTime: Date;
+  startDate: string;
+  endDate: string;
 }

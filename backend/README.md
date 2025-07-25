@@ -44,7 +44,11 @@ dotnet ef migrations remove -s src/Api -p src/Infrastructure
 
 ```sh
 dotnet ef database update -s src/Api -p src/Infrastructure
+# or
+dotnet ef database update <MIGRATION> -s src/Api -p src/Infrastructure
 ```
+
+> \<MIGRATION\> - The target migration. Migrations may be identified by name or by ID. The number 0 is a special case that means before the first migration and causes all migrations to be reverted. If no migration is specified, the command defaults to the last migration.
 
 ### Drop database
 

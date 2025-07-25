@@ -6,5 +6,7 @@ public sealed record BookWorkspaceRequest(
     Guid WorkspaceId,
     int? DeskCount,
     int? RoomCapacity,
-    DateTime StartTime,
-    DateTime EndTime);
+    DateOnly StartDate,
+    DateOnly EndDate,
+    TimeOnly StartTime,
+    TimeOnly EndTime);

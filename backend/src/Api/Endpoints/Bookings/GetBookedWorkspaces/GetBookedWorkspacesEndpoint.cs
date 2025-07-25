@@ -25,6 +25,8 @@ public sealed class GetBookedWorkspacesEndpoint : IEndpoint
                     .FirstOrDefault(),
                 booking.Desks.Count,
                 booking.Room!.Capacity,
+                booking.StartDate,
+                booking.EndDate,
                 booking.StartTime,
                 booking.EndTime))
             .ToListAsync(cancellationToken);

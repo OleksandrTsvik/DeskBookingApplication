@@ -10,8 +10,10 @@ public sealed class Booking
 
     public required string UserName { get; set; }
     public required string UserEmail { get; set; }
-    public DateTime StartTime { get; set; }
-    public DateTime EndTime { get; set; }
+    public DateOnly StartDate { get; set; }
+    public DateOnly EndDate { get; set; }
+    public TimeOnly StartTime { get; set; }
+    public TimeOnly EndTime { get; set; }
 
     public Workspace? Workspace { get; set; }
     public List<Desk> Desks { get; set; } = [];

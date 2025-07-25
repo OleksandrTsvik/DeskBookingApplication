@@ -31,12 +31,12 @@ public sealed class GetWorkspacesEndpoint : IEndpoint
                         groupedRooms.Key))
                     .ToList(),
                 workspace.Bookings
-                    .Where(booking => booking.EndTime > DateTime.UtcNow)
+                    .Where(booking => booking.EndDate >= DateOnly.FromDateTime(DateTime.Now))
                     .Select(booking => new UserBookingResponse(
                         booking.Desks.Count,
                         booking.Room!.Capacity,
-                        booking.StartTime,
-                        booking.EndTime))
+                        booking.StartDate,
+                        booking.EndDate))
                     .FirstOrDefault()))
             .ToListAsync(cancellationToken);
 

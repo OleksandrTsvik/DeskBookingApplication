@@ -1,5 +1,12 @@
 type TimeUnit = 'day' | 'hour' | 'millisecond';
 
+type TimeOnly = {
+  hours: number;
+  minutes: number;
+  seconds: number;
+  milliseconds: number;
+};
+
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
 const MS_PER_HOUR = 1000 * 60 * 60;
 
@@ -21,6 +28,48 @@ export function diffDates(start: Date, end: Date, unit: TimeUnit = 'millisecond'
   }
 
   return Math.round(result);
+}
+
+export function toDateOnlyString(date: Date): string {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+}
+
+export function toTimeOnlyString(date: Date | Partial<TimeOnly>): string {
+  let time: TimeOnly;
+
+  if (date instanceof Date) {
+    time = {
+      hours: date.getHours(),
+      minutes: date.getMinutes(),
+      seconds: date.getSeconds(),
+      milliseconds: date.getMilliseconds(),
+    };
+  } else {
+    time = {
+      hours: date.hours ?? 0,
+      minutes: date.minutes ?? 0,
+      seconds: date.seconds ?? 0,
+      milliseconds: date.milliseconds ?? 0,
+    };
+  }
+
+  const hours = time.hours.toString().padStart(2, '0');
+  const minutes = time.minutes.toString().padStart(2, '0');
+  const seconds = time.seconds.toString().padStart(2, '0');
+  const milliseconds = time.milliseconds.toString().padStart(3, '0');
+
+  return `${hours}:${minutes}:${seconds}.${milliseconds}`;
+}
+
+export function timeOnlyToDate(time: string): Date {
+  const today = toDateOnlyString(new Date());
+  const date = `${today}T${time}`;
+
+  return new Date(date);
 }
 
 export function getLastDayOfMonth(date: Date): number;

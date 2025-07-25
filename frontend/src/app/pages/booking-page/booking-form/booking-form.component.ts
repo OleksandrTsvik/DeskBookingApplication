@@ -10,8 +10,8 @@ import { DropdownComponent, DropdownOption } from '@/shared/components/dropdown/
 import { FormControlComponent } from '@/shared/components/form-control/form-control.component';
 import { InputComponent } from '@/shared/components/input/input.component';
 import { TimeDropdownComponent, TimeDropdownValue } from '@/shared/components/time-dropdown/time-dropdown.component';
-import { Nullable } from '@/shared/models/common.models';
 import { arrayRange } from '@/shared/utils/array.utils';
+import { toDateOnlyString, toTimeOnlyString } from '@/shared/utils/date.utils';
 import { compareValuesValidator } from '@/shared/validators/compare-values.validator';
 
 import { BookWorkspaceRequest, BookableWorkspaceResponse } from '../booking-page.models';
@@ -69,13 +69,9 @@ export class BookingFormComponent implements OnInit {
       },
       {
         validators: compareValuesValidator(
-          ['date.startDate', 'date.endDate', 'startTime', 'endTime'],
-          (startDate: Date, endDate: Date, startTime: TimeDropdownValue, endTime: TimeDropdownValue) => {
-            const startDateTime = this.applyTimeToDate(startDate, startTime);
-            const endDateTime = this.applyTimeToDate(endDate, endTime);
-
-            return endDateTime > startDateTime;
-          },
+          ['startTime', 'endTime'],
+          (startTime: TimeDropdownValue, endTime: TimeDropdownValue) =>
+            endTime.hours > startTime.hours || (endTime.hours === startTime.hours && endTime.minutes > startTime.hours),
         ),
       },
     ),
@@ -104,17 +100,16 @@ export class BookingFormComponent implements OnInit {
       return;
     }
 
-    const startDateTime = this.applyTimeToDate(this.form.value.date?.startDate, this.form.value.time?.startTime);
-    const endDateTime = this.applyTimeToDate(this.form.value.date?.endDate, this.form.value.time?.endTime);
-
     const values: BookWorkspaceRequest = {
       name: this.form.value.name,
       email: this.form.value.email,
       workspaceId: this.form.value.workspaceId,
       deskCount: this.form.value.deskCount,
       roomCapacity: this.form.value.roomCapacity,
-      startTime: startDateTime,
-      endTime: endDateTime,
+      startDate: toDateOnlyString(this.form.value.date?.startDate!),
+      endDate: toDateOnlyString(this.form.value.date?.endDate!),
+      startTime: toTimeOnlyString(this.form.value.time?.startTime!),
+      endTime: toTimeOnlyString(this.form.value.time?.endTime!),
     };
 
     this.submit.emit(values);
@@ -207,16 +202,5 @@ export class BookingFormComponent implements OnInit {
       control.clearValidators();
       control.reset();
     }
-  }
-
-  private applyTimeToDate(date: Nullable<Date>, time: Nullable<TimeDropdownValue>): Date {
-    const updatedDate = date ? new Date(date) : new Date();
-
-    if (time) {
-      updatedDate.setHours(time.hours);
-      updatedDate.setMinutes(time.minutes);
-    }
-
-    return updatedDate;
   }
 }

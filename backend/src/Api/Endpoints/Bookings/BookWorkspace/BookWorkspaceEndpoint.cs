@@ -25,10 +25,10 @@ public sealed class BookWorkspaceEndpoint : IEndpoint
             .Include(workspace => workspace.Desks)
             .Include(workspace => workspace.Rooms)
             .Include(workspace => workspace.Bookings
-                .Where(booking => booking.EndTime > DateTime.UtcNow))
+                .Where(booking => booking.EndDate >= DateOnly.FromDateTime(DateTime.Now)))
                 .ThenInclude(booking => booking.Room)
             .Include(workspace => workspace.Bookings
-                .Where(booking => booking.EndTime > DateTime.UtcNow))
+                .Where(booking => booking.EndDate >= DateOnly.FromDateTime(DateTime.Now)))
                 .ThenInclude(booking => booking.Desks)
             .Where(workspace => workspace.Id == request.WorkspaceId)
             .FirstOrDefaultAsync(cancellationToken);
@@ -38,9 +38,9 @@ public sealed class BookWorkspaceEndpoint : IEndpoint
             return TypedResults.BadRequest("Workspace not found.");
         }
 
-        TimeSpan bookingDuration = request.EndTime - request.StartTime;
+        int bookingDuration = request.EndDate.DayNumber - request.StartDate.DayNumber + 1;
 
-        if (bookingDuration > workspace.MaxBookingDuration)
+        if (bookingDuration > workspace.MaxBookingDuration.Days)
         {
             return TypedResults.BadRequest("Booking duration exceeds maximum allowed.");
         }
@@ -71,6 +71,8 @@ public sealed class BookWorkspaceEndpoint : IEndpoint
             WorkspaceId = workspace.Id,
             UserName = request.Name,
             UserEmail = request.Email,
+            StartDate = request.StartDate,
+            EndDate = request.EndDate,
             StartTime = request.StartTime,
             EndTime = request.EndTime,
             Desks = availableDesks,

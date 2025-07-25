@@ -21,6 +21,14 @@ public sealed class BookingConfiguration : IEntityTypeConfiguration<Booking>
             .HasMaxLength(BookingRules.MaxUserEmailLength);
 
         builder
+            .Property(booking => booking.StartDate)
+            .IsRequired();
+
+        builder
+            .Property(booking => booking.EndDate)
+            .IsRequired();
+
+        builder
             .Property(booking => booking.StartTime)
             .IsRequired();
 

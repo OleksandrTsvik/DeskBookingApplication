@@ -17,5 +17,5 @@ public sealed record WorkspaceRoomResponse(
 public sealed record UserBookingResponse(
     int? DeskCount,
     int? RoomCapacity,
-    DateTime StartTime,
-    DateTime EndTime);
+    DateOnly StartDate,
+    DateOnly EndDate);

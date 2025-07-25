@@ -4,6 +4,8 @@ export interface BookedWorkspaceResponse {
   photo?: string;
   deskCount?: number;
   roomCapacity?: number;
-  startTime: Date;
-  endTime: Date;
+  startDate: string;
+  endDate: string;
+  startTime: string;
+  endTime: string;
 }

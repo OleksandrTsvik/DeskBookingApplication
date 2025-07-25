@@ -13,6 +13,8 @@ export interface BookWorkspaceRequest {
   workspaceId: Nullable<string>;
   deskCount: Nullable<number>;
   roomCapacity: Nullable<number>;
-  startTime: Nullable<Date>;
-  endTime: Nullable<Date>;
+  startDate: Nullable<string>;
+  endDate: Nullable<string>;
+  startTime: Nullable<string>;
+  endTime: Nullable<string>;
 }

@@ -31,9 +31,9 @@
         class="icon"
       ></span>
       @if (isSameDate()) {
-        {{ bookedWorkspace().startTime | date: 'longDate' }}
+        {{ bookedWorkspace().startDate | date: 'longDate' }}
       } @else {
-        {{ bookedWorkspace().startTime | date: 'longDate' }} - {{ bookedWorkspace().endTime | date: 'longDate' }}
+        {{ bookedWorkspace().startDate | date: 'longDate' }} - {{ bookedWorkspace().endDate | date: 'longDate' }}
         <span [ngPlural]="durationInDays()">
           <ng-template ngPluralCase="=1">(1 day)</ng-template>
           <ng-template ngPluralCase="other">({{ durationInDays() }} days)</ng-template>
@@ -45,7 +45,7 @@
         appIcon="clock-hour-3"
         class="icon"
       ></span>
-      from {{ bookedWorkspace().startTime | date: 'shortTime' }} to {{ bookedWorkspace().endTime | date: 'shortTime' }}
+      from {{ startTime() | date: 'shortTime' }} to {{ endTime() | date: 'shortTime' }}
       @if (isSameDate()) {
         <span [ngPlural]="durationInHours()">
           <ng-template ngPluralCase="=1">(1 hour)</ng-template>

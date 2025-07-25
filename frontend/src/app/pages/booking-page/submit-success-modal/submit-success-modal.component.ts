@@ -18,8 +18,8 @@ export class SubmitSuccessModalComponent {
   email = input.required<Nullable<string>>();
   deskCount = input.required<Nullable<number>>();
   roomCapacity = input.required<Nullable<number>>();
-  startDate = input.required<Nullable<Date>>();
-  endDate = input.required<Nullable<Date>>();
+  startDate = input.required<Nullable<string>>();
+  endDate = input.required<Nullable<string>>();
 
   visible = model(false);
 
