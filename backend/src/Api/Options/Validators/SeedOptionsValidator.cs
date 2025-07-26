@@ -4,7 +4,7 @@ using Infrastructure.Options;
 
 namespace Api.Options.Validators;
 
-public class SeedOptionsValidator : AbstractValidator<SeedOptions>
+public sealed class SeedOptionsValidator : AbstractValidator<SeedOptions>
 {
     public SeedOptionsValidator()
     {

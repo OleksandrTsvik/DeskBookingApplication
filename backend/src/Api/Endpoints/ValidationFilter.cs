@@ -3,7 +3,7 @@ using FluentValidation.Results;
 
 namespace Api.Endpoints;
 
-public class ValidationFilter<TRequest> : IEndpointFilter
+public sealed class ValidationFilter<TRequest> : IEndpointFilter
 {
     private readonly IValidator<TRequest> _validator;
 

@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Api.Endpoints.Bookings.BookWorkspace;
 
-public class BookWorkspaceValidator : AbstractValidator<BookWorkspaceRequest>
+public sealed class BookWorkspaceValidator : AbstractValidator<BookWorkspaceRequest>
 {
     public BookWorkspaceValidator()
     {

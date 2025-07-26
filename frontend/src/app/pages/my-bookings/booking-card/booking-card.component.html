@@ -8,12 +8,13 @@
   <div class="mb-6 flex items-center justify-between">
     <h4 class="text-[32px] font-bold">{{ workspaceName() }} {{ workspaceOptions() }}</h4>
     <div class="flex gap-4">
-      <button
+      <a
         appButton
         class="text-lg"
         icon="edit"
         variant="outlined"
-      ></button>
+        [routerLink]="['/bookings/edit', bookedWorkspace().id]"
+      ></a>
       <button
         appButton
         class="text-lg"

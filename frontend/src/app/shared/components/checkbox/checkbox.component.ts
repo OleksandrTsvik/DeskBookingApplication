@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { IconDirective } from '@/shared/directives/icon.directive';
@@ -25,21 +25,21 @@ export class CheckboxComponent<ValueType> implements ControlValueAccessor {
   name = input<string>();
   value = input<ValueType>(null as ValueType);
 
-  isChecked = false;
-  isTouched = false;
-  isDisabled = false;
+  isChecked = signal(false);
+  isTouched = signal(false);
+  isDisabled = signal(false);
 
   private onChangeControl: OnChangeControlFn<boolean> = () => {};
   private onTouchedControl: OnTouchedControlFn = () => {};
 
   onChange(event: Event): void {
-    if (this.isDisabled) {
+    if (this.isDisabled()) {
       return;
     }
 
     const element = event.target as HTMLInputElement;
 
-    this.isChecked = element.checked;
+    this.isChecked.set(element.checked);
     this.checkboxGroup?.onChange(this.value());
     this.onChangeControl(element.checked);
   }
@@ -49,7 +49,7 @@ export class CheckboxComponent<ValueType> implements ControlValueAccessor {
   }
 
   writeValue(checked: boolean): void {
-    this.isChecked = checked;
+    this.isChecked.set(checked);
   }
 
   registerOnChange(fn: OnChangeControlFn<boolean>): void {
@@ -61,12 +61,12 @@ export class CheckboxComponent<ValueType> implements ControlValueAccessor {
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
+    this.isDisabled.set(isDisabled);
   }
 
   private markAsTouched(): void {
-    if (!this.isTouched) {
-      this.isTouched = true;
+    if (!this.isTouched()) {
+      this.isTouched.set(true);
       this.onTouchedControl();
     }
   }

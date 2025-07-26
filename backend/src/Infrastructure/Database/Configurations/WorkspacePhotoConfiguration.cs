@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Database.Configurations;
 
-public class WorkspacePhotoConfiguration : IEntityTypeConfiguration<WorkspacePhoto>
+public sealed class WorkspacePhotoConfiguration : IEntityTypeConfiguration<WorkspacePhoto>
 {
     public void Configure(EntityTypeBuilder<WorkspacePhoto> builder)
     {

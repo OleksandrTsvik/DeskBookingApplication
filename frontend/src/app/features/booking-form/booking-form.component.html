@@ -120,13 +120,8 @@
       </app-form-control>
     </app-form-control>
 
-    <button
-      appButton
-      class="w-full"
-      type="submit"
-      [disabled]="form.invalid"
-    >
-      Submit
-    </button>
+    @if (actions(); as actions) {
+      <ng-container *ngTemplateOutlet="actions" />
+    }
   </div>
 </form>

@@ -2,22 +2,22 @@ using Infrastructure.Database;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
-namespace Api.Endpoints.Workspaces.GetBookableWorkspaces;
+namespace Api.Endpoints.Workspaces.GetAvailableWorkspaces;
 
-public sealed class GetBookableWorkspacesEndpoint : IEndpoint
+public sealed class GetAvailableWorkspacesEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("workspaces/book", Handler)
+        app.MapGet("workspaces/available", Handler)
             .WithTags(Tags.Workspaces);
     }
 
-    public static async Task<Ok<List<BookableWorkspaceResponse>>> Handler(
+    public static async Task<Ok<List<AvailableWorkspaceResponse>>> Handler(
         ApplicationDbContext dbContext,
         CancellationToken cancellationToken)
     {
-        List<BookableWorkspaceResponse> workspaces = await dbContext.Workspaces
-            .Select(workspace => new BookableWorkspaceResponse(
+        List<AvailableWorkspaceResponse> workspaces = await dbContext.Workspaces
+            .Select(workspace => new AvailableWorkspaceResponse(
                 workspace.Id,
                 workspace.Name,
                 workspace.Desks.Count(),

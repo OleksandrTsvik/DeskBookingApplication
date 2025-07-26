@@ -4,9 +4,21 @@
 />
 
 <app-booking-form
-  [initWorkspaceTypeName]="workspaceType()"
+  #bookingForm
+  [initValues]="{ workspaceName: workspaceType() }"
   (submit)="onSubmit($event)"
-/>
+>
+  <ng-template #formActions>
+    <button
+      appButton
+      class="w-full"
+      type="submit"
+      [disabled]="bookingForm.form.invalid"
+    >
+      Submit
+    </button>
+  </ng-template>
+</app-booking-form>
 
 <app-submit-success-modal
   [deskCount]="submittedFormData()?.deskCount"

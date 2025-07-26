@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Api.Endpoints.Bookings.CancelWorkspaceBooking;
 
-public class CancelWorkspaceBookingEndpoint : IEndpoint
+public sealed class CancelWorkspaceBookingEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {

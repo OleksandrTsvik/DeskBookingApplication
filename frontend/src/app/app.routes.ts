@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { LayoutComponent } from '@/layout/layout.component';
+import { BookingEditPageComponent } from '@/pages/booking-edit-page/booking-edit-page.component';
 import { BookingPageComponent } from '@/pages/booking-page/booking-page.component';
 import { HomePageComponent } from '@/pages/home-page/home-page.component';
 import { MyBookingsComponent } from '@/pages/my-bookings/my-bookings.component';
@@ -30,6 +31,11 @@ export const routes: Routes = [
       {
         path: 'workspaces/book',
         component: BookingPageComponent,
+        title: 'Booking Form',
+      },
+      {
+        path: 'bookings/edit/:bookingId',
+        component: BookingEditPageComponent,
         title: 'Booking Form',
       },
       {

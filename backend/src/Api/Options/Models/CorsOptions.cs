@@ -1,6 +1,6 @@
 namespace Api.Options.Models;
 
-public class CorsOptions
+public sealed class CorsOptions
 {
     public static readonly string ConfigurationSectionName = "Cors";
 

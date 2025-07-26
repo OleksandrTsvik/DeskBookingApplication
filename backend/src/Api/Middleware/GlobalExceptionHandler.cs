@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Middleware;
 
-public class GlobalExceptionHandler : IExceptionHandler
+public sealed class GlobalExceptionHandler : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(
         HttpContext httpContext,

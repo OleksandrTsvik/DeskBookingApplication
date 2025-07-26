@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Api.Options.Validators;
 
-public class CorsOptionsValidator : AbstractValidator<CorsOptions>
+public sealed class CorsOptionsValidator : AbstractValidator<CorsOptions>
 {
     public CorsOptionsValidator()
     {

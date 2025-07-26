@@ -1,15 +1,16 @@
 import { DatePipe, I18nPluralPipe, NgPlural, NgPluralCase } from '@angular/common';
 import { Component, computed, inject, input, output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { ButtonComponent } from '@/shared/components/button/button.component';
 import { IconDirective } from '@/shared/directives/icon.directive';
-import { diffDates, timeOnlyToDate } from '@/shared/utils/date.utils';
+import { dateOnlyToDate, diffDates, timeOnlyToDate } from '@/shared/utils/date.utils';
 
 import { BookedWorkspaceResponse } from '../my-bookings.models';
 
 @Component({
   selector: 'app-booking-card',
-  imports: [DatePipe, NgPlural, NgPluralCase, ButtonComponent, IconDirective],
+  imports: [DatePipe, NgPlural, NgPluralCase, RouterLink, ButtonComponent, IconDirective],
   templateUrl: './booking-card.component.html',
   styleUrl: './booking-card.component.css',
   providers: [I18nPluralPipe],
@@ -36,7 +37,7 @@ export class BookingCardComponent {
 
   durationInDays = computed(() => {
     const { startDate, endDate } = this.bookedWorkspace();
-    return diffDates(new Date(startDate), new Date(endDate), 'day') + 1;
+    return diffDates(dateOnlyToDate(startDate), dateOnlyToDate(endDate), 'day') + 1;
   });
 
   durationInHours = computed(() => diffDates(this.startTime(), this.endTime(), 'hour'));

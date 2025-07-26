@@ -1,8 +1,18 @@
-import { NgPlural, NgPluralCase } from '@angular/common';
-import { Component, DestroyRef, OnInit, computed, inject, input, output, signal } from '@angular/core';
+import { NgPlural, NgPluralCase, NgTemplateOutlet } from '@angular/common';
+import {
+  Component,
+  DestroyRef,
+  OnInit,
+  TemplateRef,
+  computed,
+  contentChild,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
-import { ButtonComponent } from '@/shared/components/button/button.component';
 import { CheckboxGroupComponent } from '@/shared/components/checkbox/checkbox-group.component';
 import { CheckboxComponent } from '@/shared/components/checkbox/checkbox.component';
 import { DatePickerComponent } from '@/shared/components/date-picker/date-picker.component';
@@ -11,19 +21,19 @@ import { FormControlComponent } from '@/shared/components/form-control/form-cont
 import { InputComponent } from '@/shared/components/input/input.component';
 import { TimeDropdownComponent, TimeDropdownValue } from '@/shared/components/time-dropdown/time-dropdown.component';
 import { arrayRange } from '@/shared/utils/array.utils';
-import { toDateOnlyString, toTimeOnlyString } from '@/shared/utils/date.utils';
+import { dateOnlyToDate, toDateOnlyString, toTimeOnly, toTimeOnlyString } from '@/shared/utils/date.utils';
 import { compareValuesValidator } from '@/shared/validators/compare-values.validator';
 
-import { BookWorkspaceRequest, BookableWorkspaceResponse } from '../booking-page.models';
-import { BookingPageService } from '../booking-page.service';
+import { AvailableWorkspaceResponse, BookingFormInitValues, BookingFormValues } from './booking-form.models';
+import { BookingFormService } from './booking-form.service';
 
 @Component({
   selector: 'app-booking-form',
   imports: [
     NgPlural,
     NgPluralCase,
+    NgTemplateOutlet,
     ReactiveFormsModule,
-    ButtonComponent,
     CheckboxGroupComponent,
     CheckboxComponent,
     DatePickerComponent,
@@ -39,10 +49,12 @@ export class BookingFormComponent implements OnInit {
   private formBuilder = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
 
-  private bookingPageService = inject(BookingPageService);
+  private bookingFormService = inject(BookingFormService);
 
-  initWorkspaceTypeName = input<string>();
-  submit = output<BookWorkspaceRequest>();
+  initValues = input<Partial<BookingFormInitValues>>();
+  submit = output<BookingFormValues>();
+
+  actions = contentChild<TemplateRef<any>>('formActions');
 
   form = this.formBuilder.group({
     name: ['', Validators.required],
@@ -77,20 +89,20 @@ export class BookingFormComponent implements OnInit {
     ),
   });
 
-  bookableWorkspaces = signal<BookableWorkspaceResponse[]>([]);
+  availableWorkspaces = signal<AvailableWorkspaceResponse[]>([]);
   isFetching = signal<boolean>(false);
 
   workspaceTypeOptions = computed<DropdownOption<string>[]>(() =>
-    this.bookableWorkspaces().map((workspace) => ({ label: workspace.name, value: workspace.id })),
+    this.availableWorkspaces().map((workspace) => ({ label: workspace.name, value: workspace.id })),
   );
 
   deskCountOptions = signal<DropdownOption<number>[] | null>(null);
   roomCapacities = signal<number[] | null>(null);
 
   ngOnInit(): void {
-    this.subscribeToLoadBookableWorkspaces();
+    this.initFormValues();
+    this.subscribeToLoadAvailableWorkspaces();
     this.subscribeToWorkspaceIdChanges();
-    this.subscribeToDateChanges();
   }
 
   onSubmit(event: Event): void {
@@ -100,31 +112,55 @@ export class BookingFormComponent implements OnInit {
       return;
     }
 
-    const values: BookWorkspaceRequest = {
+    const values: BookingFormValues = {
       name: this.form.value.name,
       email: this.form.value.email,
       workspaceId: this.form.value.workspaceId,
       deskCount: this.form.value.deskCount,
       roomCapacity: this.form.value.roomCapacity,
-      startDate: toDateOnlyString(this.form.value.date?.startDate!),
-      endDate: toDateOnlyString(this.form.value.date?.endDate!),
-      startTime: toTimeOnlyString(this.form.value.time?.startTime!),
-      endTime: toTimeOnlyString(this.form.value.time?.endTime!),
+      startDate: toDateOnlyString(this.form.value.date?.startDate),
+      endDate: toDateOnlyString(this.form.value.date?.endDate),
+      startTime: toTimeOnlyString(this.form.value.time?.startTime),
+      endTime: toTimeOnlyString(this.form.value.time?.endTime),
     };
 
     this.submit.emit(values);
   }
 
-  private subscribeToLoadBookableWorkspaces(): void {
+  private initFormValues(): void {
+    const initValues = this.initValues();
+
+    this.form.patchValue({
+      name: initValues?.name || '',
+      email: initValues?.email || '',
+      date: {
+        startDate: initValues?.startDate ? dateOnlyToDate(initValues.startDate) : null,
+        endDate: initValues?.endDate ? dateOnlyToDate(initValues.endDate) : null,
+      },
+      time: {
+        startTime: initValues?.startTime ? toTimeOnly(initValues.startTime) : null,
+        endTime: initValues?.endTime ? toTimeOnly(initValues.endTime) : null,
+      },
+    });
+  }
+
+  private subscribeToLoadAvailableWorkspaces(): void {
     this.isFetching.set(true);
 
-    const subscription = this.bookingPageService.loadBookableWorkspaces().subscribe({
+    const subscription = this.bookingFormService.loadAvailableWorkspaces().subscribe({
       next: (response) => {
-        this.bookableWorkspaces.set(response);
+        this.availableWorkspaces.set(response);
 
-        const initWorkspaceId = response.find((workspace) => workspace.name === this.initWorkspaceTypeName())?.id;
+        const initValues = this.initValues();
+        const initWorkspaceId = response.find(
+          ({ id, name }) => id === initValues?.workspaceId || name === initValues?.workspaceName,
+        )?.id;
 
-        this.form.patchValue({ workspaceId: initWorkspaceId });
+        this.form.patchValue({
+          workspaceId: initWorkspaceId,
+          deskCount: initValues?.deskCount ?? null,
+          roomCapacity: initValues?.roomCapacity ?? null,
+        });
       },
       complete: () => this.isFetching.set(false),
       error: () => this.isFetching.set(false),
@@ -141,17 +177,9 @@ export class BookingFormComponent implements OnInit {
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 
-  private subscribeToDateChanges(): void {
-    const subscription = this.form.controls.date.valueChanges.subscribe(() => {
-      this.form.controls.time.updateValueAndValidity();
-    });
-
-    this.destroyRef.onDestroy(() => subscription.unsubscribe());
-  }
-
   private handleWorkspaceIdChange(workspaceId: string | null): void {
     const prevWorkspaceId = this.form.value.workspaceId;
-    const selectedWorkspace = this.bookableWorkspaces().find((workspace) => workspace.id === workspaceId);
+    const selectedWorkspace = this.availableWorkspaces().find((workspace) => workspace.id === workspaceId);
 
     this.updateDeskCountOptions(selectedWorkspace?.deskCount);
     this.updateRoomCapacities(selectedWorkspace?.roomCapacities);

@@ -1,3 +1,7 @@
+import { Nullable } from '../models/common.models';
+
+import { isDate, isString } from './type-guards';
+
 type TimeUnit = 'day' | 'hour' | 'millisecond';
 
 type TimeOnly = {
@@ -30,44 +34,68 @@ export function diffDates(start: Date, end: Date, unit: TimeUnit = 'millisecond'
   return Math.round(result);
 }
 
-export function toDateOnlyString(date: Date): string {
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
+export function toDateOnlyString(date: Nullable<Date>): string {
+  const dateonly = dateOnlyToDate(date);
+
+  const year = dateonly.getFullYear();
+  const month = (dateonly.getMonth() + 1).toString().padStart(2, '0');
+  const day = dateonly.getDate().toString().padStart(2, '0');
 
   return `${year}-${month}-${day}`;
 }
 
-export function toTimeOnlyString(date: Date | Partial<TimeOnly>): string {
-  let time: TimeOnly;
+export function dateOnlyToDate(dateonly: Nullable<string | Date>): Date {
+  if (!dateonly) {
+    return new Date();
+  }
 
-  if (date instanceof Date) {
-    time = {
+  if (isDate(dateonly)) {
+    return dateonly;
+  }
+
+  return new Date(dateonly);
+}
+
+export function toTimeOnlyString(time: Nullable<Date | Partial<TimeOnly>>): string {
+  const timeonly = toTimeOnly(time);
+
+  const hours = timeonly.hours.toString().padStart(2, '0');
+  const minutes = timeonly.minutes.toString().padStart(2, '0');
+  const seconds = timeonly.seconds.toString().padStart(2, '0');
+  const milliseconds = timeonly.milliseconds.toString().padStart(3, '0');
+
+  return `${hours}:${minutes}:${seconds}.${milliseconds}`;
+}
+
+export function toTimeOnly(time: Nullable<string | Date | Partial<TimeOnly>>): TimeOnly {
+  const isStringTime = isString(time);
+
+  if (isStringTime || isDate(time)) {
+    const date = isStringTime ? timeOnlyToDate(time) : time;
+
+    return {
       hours: date.getHours(),
       minutes: date.getMinutes(),
       seconds: date.getSeconds(),
       milliseconds: date.getMilliseconds(),
     };
-  } else {
-    time = {
-      hours: date.hours ?? 0,
-      minutes: date.minutes ?? 0,
-      seconds: date.seconds ?? 0,
-      milliseconds: date.milliseconds ?? 0,
-    };
   }
 
-  const hours = time.hours.toString().padStart(2, '0');
-  const minutes = time.minutes.toString().padStart(2, '0');
-  const seconds = time.seconds.toString().padStart(2, '0');
-  const milliseconds = time.milliseconds.toString().padStart(3, '0');
-
-  return `${hours}:${minutes}:${seconds}.${milliseconds}`;
+  return {
+    hours: time?.hours ?? 0,
+    minutes: time?.minutes ?? 0,
+    seconds: time?.seconds ?? 0,
+    milliseconds: time?.milliseconds ?? 0,
+  };
 }
 
-export function timeOnlyToDate(time: string): Date {
+export function timeOnlyToDate(timeonly: Nullable<string>): Date {
+  if (!timeonly) {
+    return new Date();
+  }
+
   const today = toDateOnlyString(new Date());
-  const date = `${today}T${time}`;
+  const date = `${today}T${timeonly}`;
 
   return new Date(date);
 }
@@ -78,7 +106,7 @@ export function getLastDayOfMonth(dateOrYear: Date | number, month?: number): nu
   let year: number;
   let monthIndex: number;
 
-  if (dateOrYear instanceof Date) {
+  if (isDate(dateOrYear)) {
     year = dateOrYear.getFullYear();
     monthIndex = dateOrYear.getMonth();
   } else {

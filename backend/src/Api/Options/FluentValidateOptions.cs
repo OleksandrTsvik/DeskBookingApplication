@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 
 namespace Api.Options;
 
-public class FluentValidateOptions<TOptions> : IValidateOptions<TOptions>
+public sealed class FluentValidateOptions<TOptions> : IValidateOptions<TOptions>
     where TOptions : class
 {
     private readonly IServiceProvider _serviceProvider;
