@@ -9,7 +9,7 @@ import { ModalComponent } from '@/shared/components/modal/modal.component';
   templateUrl: './submit-error-modal.component.html',
   host: {
     role: 'dialog',
-    'aria-label': 'Failed to create booking',
+    'aria-label': 'Failed to update booking',
   },
 })
 export class SubmitErrorModalComponent {

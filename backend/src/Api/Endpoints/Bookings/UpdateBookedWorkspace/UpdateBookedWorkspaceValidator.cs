@@ -1,12 +1,14 @@
 using Domain.Bookings;
 using FluentValidation;
 
-namespace Api.Endpoints.Bookings.BookWorkspace;
+namespace Api.Endpoints.Bookings.UpdateBookedWorkspace;
 
-public sealed class BookWorkspaceValidator : AbstractValidator<BookWorkspaceRequest>
+public sealed class UpdateBookedWorkspaceValidator : AbstractValidator<UpdateBookedWorkspaceRequest>
 {
-    public BookWorkspaceValidator()
+    public UpdateBookedWorkspaceValidator()
     {
+        RuleFor(x => x.Id).NotEmpty();
+
         RuleFor(x => x.Name)
             .NotEmpty()
             .MinimumLength(BookingRules.MinUserNameLength)

@@ -91,7 +91,7 @@ public sealed class BookWorkspaceEndpoint : IEndpoint
         List<Desk> workspaceDesks,
         int? deskCount)
     {
-        if (!deskCount.HasValue)
+        if (!deskCount.HasValue || deskCount == 0)
         {
             return [];
         }

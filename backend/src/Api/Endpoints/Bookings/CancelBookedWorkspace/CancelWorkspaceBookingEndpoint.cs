@@ -1,12 +1,11 @@
-
 using Infrastructure.Database;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace Api.Endpoints.Bookings.CancelWorkspaceBooking;
+namespace Api.Endpoints.Bookings.CancelBookedWorkspace;
 
-public sealed class CancelWorkspaceBookingEndpoint : IEndpoint
+public sealed class CancelBookedWorkspaceEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {

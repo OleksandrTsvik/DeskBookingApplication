@@ -13,17 +13,16 @@ import { Nullable } from '@/shared/models/common.models';
   providers: [I18nPluralPipe],
   host: {
     role: 'dialog',
-    'aria-label': 'Booking created successfully',
+    'aria-label': 'Booking updated successfully',
   },
 })
 export class SubmitSuccessModalComponent {
   private i18nPluralPipe = inject(I18nPluralPipe);
 
-  email = input.required<Nullable<string>>();
   deskCount = input.required<Nullable<number>>();
   roomCapacity = input.required<Nullable<number>>();
-  startDate = input.required<Nullable<string>>();
-  endDate = input.required<Nullable<string>>();
+  startDate = input.required<Nullable<Date | string>>();
+  endDate = input.required<Nullable<Date | string>>();
 
   visible = model(false);
 

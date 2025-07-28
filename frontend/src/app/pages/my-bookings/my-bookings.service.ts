@@ -14,7 +14,7 @@ export class MyBookingsService {
     return this.httpClient.get<BookedWorkspaceResponse[]>('http://localhost:5000/api/bookings');
   }
 
-  cancelWorkspaceBooking(id: string): Observable<Object> {
+  cancelBookedWorkspace(id: string): Observable<Object> {
     return this.httpClient.delete('http://localhost:5000/api/bookings/' + id);
   }
 }

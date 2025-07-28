@@ -17,6 +17,7 @@ public sealed class GetBookedWorkspacesEndpoint : IEndpoint
         CancellationToken cancellationToken)
     {
         List<BookedWorkspaceResponse> bookedWorkspaces = await dbContext.Bookings
+            .OrderByDescending(booking => booking.EndDate)
             .Select(booking => new BookedWorkspaceResponse(
                 booking.Id,
                 booking.Workspace!.Name,

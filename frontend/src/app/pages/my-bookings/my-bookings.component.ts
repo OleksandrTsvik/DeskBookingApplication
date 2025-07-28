@@ -37,7 +37,7 @@ export class MyBookingsComponent {
       return;
     }
 
-    const subscription = this.myBookingsService.cancelWorkspaceBooking(id).subscribe({
+    const subscription = this.myBookingsService.cancelBookedWorkspace(id).subscribe({
       complete: () => {
         this.bookingIdToCancel.set(null);
         this.bookedWorkspaces$ = this.myBookingsService.loadBookedWorkspaces();

@@ -25,6 +25,16 @@
       </div>
     </ng-template>
   </app-booking-form>
+
+  <app-submit-success-modal
+    [deskCount]="bookingForm.form.value.deskCount"
+    [endDate]="bookingForm.form.value.date?.endDate"
+    [roomCapacity]="bookingForm.form.value.roomCapacity"
+    [startDate]="bookingForm.form.value.date?.startDate"
+    [(visible)]="showSubmitSuccessModal"
+  />
+
+  <app-submit-error-modal [(visible)]="showSubmitErrorModal" />
 } @else {
   <p>Loading ...</p>
 }

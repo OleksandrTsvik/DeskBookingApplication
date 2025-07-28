@@ -13,7 +13,7 @@ export interface BookedWorkspaceResponse {
   endTime: string;
 }
 
-export interface UpdateWorkspaceBookingRequest {
+export interface UpdateBookedWorkspaceRequest {
   id: string;
   name: Nullable<string>;
   email: Nullable<string>;
