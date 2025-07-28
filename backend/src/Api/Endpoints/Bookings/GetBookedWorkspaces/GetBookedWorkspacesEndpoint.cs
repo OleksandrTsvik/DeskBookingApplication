@@ -22,6 +22,7 @@ public sealed class GetBookedWorkspacesEndpoint : IEndpoint
                 booking.Id,
                 booking.Workspace!.Name,
                 booking.Workspace.Photos
+                    .OrderBy(photo => photo.DisplayOrder)
                     .Select(photo => photo.Url)
                     .FirstOrDefault(),
                 booking.Desks.Count,

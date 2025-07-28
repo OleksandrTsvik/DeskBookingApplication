@@ -21,7 +21,10 @@ public sealed class GetWorkspacesEndpoint : IEndpoint
                 workspace.Id,
                 workspace.Name,
                 workspace.Description,
-                workspace.Photos.Select(photo => photo.Url).ToList(),
+                workspace.Photos
+                    .OrderBy(photo => photo.DisplayOrder)
+                    .Select(photo => photo.Url)
+                    .ToList(),
                 workspace.Amenities.Select(amenity => amenity.Name).ToList(),
                 workspace.Desks.Count(),
                 workspace.Rooms

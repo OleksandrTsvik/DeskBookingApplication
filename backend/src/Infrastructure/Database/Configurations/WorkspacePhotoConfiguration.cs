@@ -15,6 +15,10 @@ public sealed class WorkspacePhotoConfiguration : IEntityTypeConfiguration<Works
             .IsRequired();
 
         builder
+            .Property(workspacePhoto => workspacePhoto.DisplayOrder)
+            .IsRequired();
+
+        builder
             .HasIndex(workspacePhoto => workspacePhoto.Url)
             .IsUnique();
 

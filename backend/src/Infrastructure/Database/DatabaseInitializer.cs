@@ -122,7 +122,11 @@ public sealed class DatabaseInitializer
 
     private static List<WorkspacePhoto> CreateWorkspacePhotos(string[] photoUrls) =>
         photoUrls
-            .Select(url => new WorkspacePhoto { Url = url })
+            .Select((url, index) => new WorkspacePhoto
+            {
+                Url = url,
+                DisplayOrder = index,
+            })
             .ToList();
 
     private static List<Amenity> GetWorkspaceAmenities(List<Amenity> allAmenities, string[] amenities) =>
