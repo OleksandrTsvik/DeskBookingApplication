@@ -1,4 +1,5 @@
 import { Component, DestroyRef, inject, input, signal } from '@angular/core';
+import { finalize } from 'rxjs';
 
 import { BookingFormComponent } from '@/features/booking-form/booking-form.component';
 import { BookingFormValues } from '@/features/booking-form/booking-form.models';
@@ -28,19 +29,25 @@ export class BookingPageComponent {
 
   workspaceType = input<string>();
 
+  isBookWorkspaceLoading = signal(false);
   submittedFormData = signal<BookWorkspaceRequest | null>(null);
   showSubmitSuccessModal = signal(false);
   showSubmitErrorModal = signal(false);
 
   onSubmit(values: BookingFormValues): void {
-    const bookWorkspaceSubscription = this.bookingPageService.bookWorkspace(values).subscribe({
-      complete: () => {
-        this.submittedFormData.set(values);
-        this.showSubmitSuccessModal.set(true);
-      },
-      error: () => this.showSubmitErrorModal.set(true),
-    });
+    this.isBookWorkspaceLoading.set(true);
 
-    this.destroyRef.onDestroy(() => bookWorkspaceSubscription.unsubscribe());
+    const subscription = this.bookingPageService
+      .bookWorkspace(values)
+      .pipe(finalize(() => this.isBookWorkspaceLoading.set(false)))
+      .subscribe({
+        complete: () => {
+          this.submittedFormData.set(values);
+          this.showSubmitSuccessModal.set(true);
+        },
+        error: () => this.showSubmitErrorModal.set(true),
+      });
+
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 }

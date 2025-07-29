@@ -12,6 +12,7 @@
     </div>
 
     <app-cancel-confirm-modal
+      [loading]="isCancelLoading()"
       [visible]="bookingIdToCancel()"
       (cancel)="onCancel()"
       (close)="cancelModalClose()"

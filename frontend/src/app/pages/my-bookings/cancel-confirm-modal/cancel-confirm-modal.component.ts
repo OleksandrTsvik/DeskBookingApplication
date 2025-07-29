@@ -10,6 +10,7 @@ import { ModalComponent } from '@/shared/components/modal/modal.component';
 })
 export class CancelConfirmModalComponent {
   visible = input(false, { transform: booleanAttribute });
+  loading = input(false, { transform: booleanAttribute });
   cancel = output();
   close = output();
 

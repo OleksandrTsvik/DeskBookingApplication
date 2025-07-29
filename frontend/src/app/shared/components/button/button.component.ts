@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, booleanAttribute } from '@angular/core';
+import { Component, HostBinding, Input, booleanAttribute, input } from '@angular/core';
 import { clsx } from 'clsx';
 
 import { Icon, IconDirective } from '@/shared/directives/icon.directive';
@@ -50,6 +50,9 @@ function buildTwClasses(variant: ButtonVariant, color: ButtonColor, icon: Icon |
   selector: '[appButton]',
   imports: [IconDirective],
   templateUrl: './button.component.html',
+  host: {
+    '[attr.disabled]': 'disabled() || loading() || null',
+  },
 })
 export class ButtonComponent {
   @HostBinding('class')
@@ -58,6 +61,9 @@ export class ButtonComponent {
   private _variant: ButtonVariant = 'solid';
   private _color: ButtonColor = 'primary';
   private _icon: Icon | null = null;
+
+  disabled = input(false, { transform: booleanAttribute });
+  loading = input(false, { transform: booleanAttribute });
 
   @Input()
   set icon(value: Icon | null) {

@@ -1,5 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { finalize } from 'rxjs';
 
 import { PageTitleComponent } from '@/features/page-title/page-title.component';
 
@@ -21,6 +22,7 @@ export class MyBookingsComponent {
   bookedWorkspaces$ = this.myBookingsService.loadBookedWorkspaces();
 
   bookingIdToCancel = signal<string | null>(null);
+  isCancelLoading = signal(false);
 
   cancelModalOpen(id: string): void {
     this.bookingIdToCancel.set(id);
@@ -37,12 +39,17 @@ export class MyBookingsComponent {
       return;
     }
 
-    const subscription = this.myBookingsService.cancelBookedWorkspace(id).subscribe({
-      complete: () => {
-        this.bookingIdToCancel.set(null);
-        this.bookedWorkspaces$ = this.myBookingsService.loadBookedWorkspaces();
-      },
-    });
+    this.isCancelLoading.set(true);
+
+    const subscription = this.myBookingsService
+      .cancelBookedWorkspace(id)
+      .pipe(finalize(() => this.isCancelLoading.set(false)))
+      .subscribe({
+        complete: () => {
+          this.bookingIdToCancel.set(null);
+          this.bookedWorkspaces$ = this.myBookingsService.loadBookedWorkspaces();
+        },
+      });
 
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }

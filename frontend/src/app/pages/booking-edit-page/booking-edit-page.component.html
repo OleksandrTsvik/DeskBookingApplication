@@ -12,6 +12,7 @@
           appButton
           type="submit"
           [disabled]="bookingForm.form.invalid"
+          [loading]="isUpdateBookedWorkspaceLoading()"
         >
           Save changes
         </button>

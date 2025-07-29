@@ -1,7 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, DestroyRef, OnInit, inject, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 
 import { BookingFormComponent } from '@/features/booking-form/booking-form.component';
 import { BookingFormValues } from '@/features/booking-form/booking-form.models';
@@ -35,6 +35,7 @@ export class BookingEditPageComponent implements OnInit {
 
   bookedWorkspace$?: Observable<BookedWorkspaceResponse>;
 
+  isUpdateBookedWorkspaceLoading = signal(false);
   showSubmitSuccessModal = signal(false);
   showSubmitErrorModal = signal(false);
 
@@ -43,15 +44,20 @@ export class BookingEditPageComponent implements OnInit {
   }
 
   onSubmit(values: BookingFormValues): void {
+    this.isUpdateBookedWorkspaceLoading.set(true);
+
     const request: UpdateBookedWorkspaceRequest = {
       ...values,
       id: this.bookingId(),
     };
 
-    const subscription = this.bookingEditPageService.updateBookedWorkspace(request).subscribe({
-      complete: () => this.showSubmitSuccessModal.set(true),
-      error: () => this.showSubmitErrorModal.set(true),
-    });
+    const subscription = this.bookingEditPageService
+      .updateBookedWorkspace(request)
+      .pipe(finalize(() => this.isUpdateBookedWorkspaceLoading.set(false)))
+      .subscribe({
+        complete: () => this.showSubmitSuccessModal.set(true),
+        error: () => this.showSubmitErrorModal.set(true),
+      });
 
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
