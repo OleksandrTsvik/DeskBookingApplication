@@ -3,6 +3,7 @@ import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { finalize } from 'rxjs';
 
 import { PageTitleComponent } from '@/features/page-title/page-title.component';
+import { SpinnerComponent } from '@/shared/components/spinner/spinner.component';
 
 import { BookingCardComponent } from './booking-card/booking-card.component';
 import { CancelConfirmModalComponent } from './cancel-confirm-modal/cancel-confirm-modal.component';
@@ -11,7 +12,14 @@ import { MyBookingsService } from './my-bookings.service';
 
 @Component({
   selector: 'app-my-bookings',
-  imports: [AsyncPipe, PageTitleComponent, BookingCardComponent, CancelConfirmModalComponent, EmptyBookingsComponent],
+  imports: [
+    AsyncPipe,
+    PageTitleComponent,
+    SpinnerComponent,
+    BookingCardComponent,
+    CancelConfirmModalComponent,
+    EmptyBookingsComponent,
+  ],
   templateUrl: './my-bookings.component.html',
   styleUrl: './my-bookings.component.css',
 })

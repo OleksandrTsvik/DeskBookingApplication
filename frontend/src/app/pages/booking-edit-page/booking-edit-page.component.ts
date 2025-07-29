@@ -7,6 +7,7 @@ import { BookingFormComponent } from '@/features/booking-form/booking-form.compo
 import { BookingFormValues } from '@/features/booking-form/booking-form.models';
 import { PageTitleComponent } from '@/features/page-title/page-title.component';
 import { ButtonComponent } from '@/shared/components/button/button.component';
+import { SpinnerComponent } from '@/shared/components/spinner/spinner.component';
 
 import { BookedWorkspaceResponse, UpdateBookedWorkspaceRequest } from './booking-edit-page.models';
 import { BookingEditPageService } from './booking-edit-page.service';
@@ -21,6 +22,7 @@ import { SubmitSuccessModalComponent } from './submit-success-modal/submit-succe
     BookingFormComponent,
     PageTitleComponent,
     ButtonComponent,
+    SpinnerComponent,
     SubmitErrorModalComponent,
     SubmitSuccessModalComponent,
   ],

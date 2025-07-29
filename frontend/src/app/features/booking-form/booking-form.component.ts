@@ -12,6 +12,7 @@ import {
   signal,
 } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { finalize } from 'rxjs';
 
 import { CheckboxGroupComponent } from '@/shared/components/checkbox/checkbox-group.component';
 import { CheckboxComponent } from '@/shared/components/checkbox/checkbox.component';
@@ -26,6 +27,7 @@ import { compareValuesValidator } from '@/shared/validators/compare-values.valid
 
 import { AvailableWorkspaceResponse, BookingFormInitValues, BookingFormValues } from './booking-form.models';
 import { BookingFormService } from './booking-form.service';
+import { SpinnerComponent } from "@/shared/components/spinner/spinner.component";
 
 @Component({
   selector: 'app-booking-form',
@@ -41,7 +43,8 @@ import { BookingFormService } from './booking-form.service';
     FormControlComponent,
     InputComponent,
     TimeDropdownComponent,
-  ],
+    SpinnerComponent
+],
   templateUrl: './booking-form.component.html',
   styleUrl: './booking-form.component.css',
 })
@@ -90,7 +93,7 @@ export class BookingFormComponent implements OnInit {
   });
 
   availableWorkspaces = signal<AvailableWorkspaceResponse[]>([]);
-  isFetching = signal<boolean>(false);
+  isAvailableWorkspacesFetching = signal<boolean>(false);
 
   workspaceTypeOptions = computed<DropdownOption<string>[]>(() =>
     this.availableWorkspaces().map((workspace) => ({ label: workspace.name, value: workspace.id })),
@@ -145,26 +148,27 @@ export class BookingFormComponent implements OnInit {
   }
 
   private subscribeToLoadAvailableWorkspaces(): void {
-    this.isFetching.set(true);
+    this.isAvailableWorkspacesFetching.set(true);
 
-    const subscription = this.bookingFormService.loadAvailableWorkspaces().subscribe({
-      next: (response) => {
-        this.availableWorkspaces.set(response);
+    const subscription = this.bookingFormService
+      .loadAvailableWorkspaces()
+      .pipe(finalize(() => this.isAvailableWorkspacesFetching.set(false)))
+      .subscribe({
+        next: (response) => {
+          this.availableWorkspaces.set(response);
 
-        const initValues = this.initValues();
-        const initWorkspaceId = response.find(
-          ({ id, name }) => id === initValues?.workspaceId || name === initValues?.workspaceName,
-        )?.id;
+          const initValues = this.initValues();
+          const initWorkspaceId = response.find(
+            ({ id, name }) => id === initValues?.workspaceId || name === initValues?.workspaceName,
+          )?.id;
 
-        this.form.patchValue({
-          workspaceId: initWorkspaceId,
-          deskCount: initValues?.deskCount ?? null,
-          roomCapacity: initValues?.roomCapacity ?? null,
-        });
-      },
-      complete: () => this.isFetching.set(false),
-      error: () => this.isFetching.set(false),
-    });
+          this.form.patchValue({
+            workspaceId: initWorkspaceId,
+            deskCount: initValues?.deskCount ?? null,
+            roomCapacity: initValues?.roomCapacity ?? null,
+          });
+        },
+      });
 
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }

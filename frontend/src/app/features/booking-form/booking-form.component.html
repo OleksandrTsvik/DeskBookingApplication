@@ -22,15 +22,22 @@
       />
     </app-form-control>
 
-    <app-form-control>
-      <app-dropdown
-        name="workspaceType"
-        formControlName="workspaceId"
-        label="Workspace type"
-        placeholder="Choose your workspace"
-        [options]="workspaceTypeOptions()"
+    @if (isAvailableWorkspacesFetching()) {
+      <app-spinner
+        size="3"
+        tip="Loading workspace options ..."
       />
-    </app-form-control>
+    } @else {
+      <app-form-control>
+        <app-dropdown
+          name="workspaceType"
+          formControlName="workspaceId"
+          label="Workspace type"
+          placeholder="Choose your workspace"
+          [options]="workspaceTypeOptions()"
+        />
+      </app-form-control>
+    }
 
     @if (roomCapacities()?.length) {
       <app-form-control errorClass="mt-3">
