@@ -11,10 +11,10 @@ export class MyBookingsService {
   private httpClient = inject(HttpClient);
 
   loadBookedWorkspaces(): Observable<BookedWorkspaceResponse[]> {
-    return this.httpClient.get<BookedWorkspaceResponse[]>('http://localhost:5000/api/bookings');
+    return this.httpClient.get<BookedWorkspaceResponse[]>('@api/bookings');
   }
 
   cancelBookedWorkspace(id: string): Observable<Object> {
-    return this.httpClient.delete('http://localhost:5000/api/bookings/' + id);
+    return this.httpClient.delete('@api/bookings/' + id);
   }
 }

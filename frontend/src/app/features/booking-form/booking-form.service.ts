@@ -10,6 +10,6 @@ export class BookingFormService {
   private httpClient = inject(HttpClient);
 
   loadAvailableWorkspaces() {
-    return this.httpClient.get<AvailableWorkspaceResponse[]>('http://localhost:5000/api/workspaces/available');
+    return this.httpClient.get<AvailableWorkspaceResponse[]>('@api/workspaces/available');
   }
 }

@@ -11,10 +11,10 @@ export class BookingEditPageService {
   private httpClient = inject(HttpClient);
 
   loadBookedWorkspace(id: string): Observable<BookedWorkspaceResponse> {
-    return this.httpClient.get<BookedWorkspaceResponse>('http://localhost:5000/api/bookings/' + id);
+    return this.httpClient.get<BookedWorkspaceResponse>('@api/bookings/' + id);
   }
 
   updateBookedWorkspace(request: UpdateBookedWorkspaceRequest) {
-    return this.httpClient.put('http://localhost:5000/api/bookings', request);
+    return this.httpClient.put('@api/bookings', request);
   }
 }

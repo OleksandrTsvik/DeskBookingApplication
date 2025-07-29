@@ -11,6 +11,6 @@ export class HomePageService {
   private httpClient = inject(HttpClient);
 
   loadWorkspaces(): Observable<WorkspaceResponse[]> {
-    return this.httpClient.get<WorkspaceResponse[]>('http://localhost:5000/api/workspaces');
+    return this.httpClient.get<WorkspaceResponse[]>('@api/workspaces');
   }
 }
