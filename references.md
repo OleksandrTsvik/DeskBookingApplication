@@ -17,6 +17,7 @@
 - [The filter(Boolean) Trick](https://michaeluloth.com/javascript-filter-boolean/)
 - [Handling Observables with NgIf and the Async Pipe](https://ultimatecourses.com/blog/angular-ngif-async-pipe)
 - [Get time differences in days between two dates](https://www.w3resource.com/javascript-exercises/javascript-date-exercise-46.php)
+- [Handling validation messages in Angular like a boss](https://sergeygultyayev.medium.com/handling-errors-in-angular-forms-like-a-boss-aa73d8e22301)
 - [[Stack Overflow] How to get FormControl instance from ControlValueAccessor](https://stackoverflow.com/q/45755958)
 - [[YouTube] How to create custom form components in Angular with ControlValueAccessor](https://www.youtube.com/watch?v=krw9R77eV44)
 - [[YouTube] Creating custom form controls in Angular (Control Value Accessors)](https://www.youtube.com/watch?v=xTcJQaWiJ2c)

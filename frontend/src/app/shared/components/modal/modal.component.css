@@ -47,9 +47,7 @@
 }
 
 .modal-icon span {
-  @apply flex h-20 w-20 items-center justify-center rounded-full text-white;
-
-  font-size: 27px;
+  @apply flex h-10 w-10 items-center justify-center rounded-full text-base text-white sm:h-20 sm:w-20 sm:text-[27px];
 }
 
 .modal-header {
@@ -57,9 +55,7 @@
 }
 
 .modal-heading {
-  @apply font-bold;
-
-  font-size: 32px;
+  @apply text-2xl font-bold sm:text-[32px];
 }
 
 .modal-body {

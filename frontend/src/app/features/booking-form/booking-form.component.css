@@ -12,20 +12,23 @@
 }
 
 .section {
-  @apply flex flex-col items-start;
+  @apply flex flex-col items-start p-3 sm:p-10;
 
-  border-radius: 20px;
+  border-radius: 8px;
   background: #ffffff;
-  padding: 40px;
+
+  @variant sm {
+    border-radius: 20px;
+  }
 }
 
 .section.section_details {
-  gap: 40px;
+  @apply gap-6 sm:gap-10;
 }
 
 .section.section_datetime,
 .datetime_group {
-  gap: 32px;
+  @apply gap-5 sm:gap-8;
 }
 
 .section__title {

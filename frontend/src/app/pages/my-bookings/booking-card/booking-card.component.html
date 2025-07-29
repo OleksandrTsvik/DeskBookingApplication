@@ -5,9 +5,9 @@
 />
 
 <div>
-  <div class="mb-6 flex items-center justify-between">
-    <h4 class="text-[32px] font-bold">{{ workspaceName() }} {{ workspaceOptions() }}</h4>
-    <div class="flex gap-4">
+  <div class="mb-6 flex flex-col flex-wrap gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <h4 class="text-2xl font-bold sm:text-[32px]">{{ workspaceName() }} {{ workspaceOptions() }}</h4>
+    <div class="flex justify-end gap-4">
       <a
         appButton
         class="text-lg"

@@ -57,7 +57,7 @@ export class BookingFormComponent implements OnInit {
   actions = contentChild<TemplateRef<any>>('formActions');
 
   form = this.formBuilder.group({
-    name: ['', Validators.required],
+    name: ['', [Validators.required, Validators.minLength(2)]],
     email: ['', [Validators.required, Validators.email]],
     workspaceId: ['', Validators.required],
     deskCount: this.formBuilder.control<number | null>(null),

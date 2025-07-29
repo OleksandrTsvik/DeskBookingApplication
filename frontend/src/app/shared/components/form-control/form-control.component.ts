@@ -1,13 +1,15 @@
 import { Component, OnInit, contentChild, inject, input } from '@angular/core';
 import { AbstractControlDirective, ControlContainer, NgControl, ValidationErrors } from '@angular/forms';
 
+import { InterpolatePipe } from '@/shared/pipes/interpolate.pipe';
+
 import { DEFAULT_ERROR_MESSAGES } from './form-control.constants';
 
 type ErrorMessage = { code: string; message: string };
 
 @Component({
   selector: 'app-form-control',
-  imports: [],
+  imports: [InterpolatePipe],
   templateUrl: './form-control.component.html',
   styleUrl: './form-control.component.css',
 })
