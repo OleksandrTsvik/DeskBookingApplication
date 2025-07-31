@@ -1,7 +1,7 @@
 @reference '#styles.css';
 
 :host {
-  @apply relative z-10;
+  @apply relative z-1000;
 }
 
 .modal-backdrop {
@@ -9,7 +9,7 @@
 }
 
 .modal-wrapper {
-  @apply fixed inset-0 z-10 w-screen overflow-y-auto;
+  @apply fixed inset-0 z-1000 w-screen overflow-y-auto;
 }
 
 .modal-box {
