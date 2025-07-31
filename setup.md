@@ -6,12 +6,24 @@
 
 ```json
 {
-  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "editor.wordWrap": "on",
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+
+  "typescript.preferences.importModuleSpecifier": "shortest",
 
   "terminal.integrated.persistentSessionReviveProcess": "never",
   "terminal.integrated.enablePersistentSessions": false,
 
-  "tailwindCSS.experimental.configFile": "frontend/src/styles/styles.scss",
+  "workbench.editorAssociations": {
+    "*.svg": "default"
+  },
+
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
+  "tailwindCSS.experimental.configFile": "frontend/src/styles/styles.css",
 
   "workbench.iconTheme": "material-icon-theme",
   "material-icon-theme.activeIconPack": "angular",
@@ -22,6 +34,7 @@
     "Domain": "dump",
     "Infrastructure": "tools",
 
+    "features": "tasks",
     "interceptors": "middleware"
   }
 }
@@ -38,12 +51,23 @@
   "autokill": true,
   "terminals": [
     {
+      "name": "database",
+      "icon": "database",
+      "color": "terminal.ansiBrightBlue",
+      "commands": [
+        "docker-compose -f docker-compose.dev.yml up postgres pgadmin4",
+        "docker-compose -f docker-compose.dev.yml down postgres pgadmin4"
+      ],
+      "execute": false,
+      "shellPath": "C:\\Program Files\\Git\\bin\\bash.exe"
+    },
+    {
       "name": "backend",
       "icon": "server",
       "color": "terminal.ansiGreen",
       "commands": [
         "cd backend/src/Api",
-        "dotnet watch --no-hot-reload --environment Local --launch-profile Local"
+        "dotnet watch --no-hot-reload --environment Development --launch-profile Development"
       ],
       "execute": false,
       "shellPath": "C:\\Program Files\\Git\\bin\\bash.exe"

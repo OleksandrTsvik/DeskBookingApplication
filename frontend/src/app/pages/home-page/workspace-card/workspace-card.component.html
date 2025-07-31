@@ -1,0 +1,135 @@
+<div>
+  <img
+    class="mb-3 aspect-3/2 w-full rounded-xl object-cover sm:rounded-2xl"
+    [alt]="workspace().name"
+    [src]="activePhoto()"
+  />
+  @if (displayPhotos().length > 1) {
+    <div class="grid w-full grid-cols-4 flex-wrap gap-2">
+      @for (photo of displayPhotos(); track $index) {
+        <div
+          class="w-full cursor-pointer"
+          [class.opacity-50]="$index !== activePhotoIndex()"
+          (click)="onPhotoClick($index)"
+        >
+          <img
+            class="aspect-16/13 w-full rounded-lg object-cover"
+            [alt]="workspace().name"
+            [src]="photo"
+          />
+        </div>
+      }
+    </div>
+  }
+</div>
+
+<div class="flex flex-col gap-4 sm:gap-8 sm:py-3">
+  <div class="grid grid-cols-1 items-start gap-4 sm:grid-cols-[7fr_1.94fr] sm:gap-12">
+    <div>
+      <h4 class="mb-3 text-2xl font-semibold sm:text-[32px]">{{ workspace().name }}</h4>
+      <p class="leading-[1.5] text-(--gray-color)">{{ workspace().description }}</p>
+    </div>
+    <a
+      appButton
+      routerLink="/workspaces/book"
+      [queryParams]="{ workspaceType: workspace().name }"
+    >
+      Book now
+    </a>
+  </div>
+  <div class="grid gap-x-4 gap-y-4 sm:gap-x-10 sm:gap-y-8 md:grid-cols-[13.25rem_1fr] lg:gap-x-32 xl:gap-x-50">
+    @if (workspace().amenities.length) {
+      <div>
+        <div class="mb-3 text-[18px] font-semibold">Amenities</div>
+        <div class="flex flex-wrap gap-3">
+          @for (amenity of workspace().amenities; track $index) {
+            <span
+              *appAmenityIcon="amenity; let icon = icon"
+              class="icon"
+              [appIcon]="icon"
+              [title]="amenity"
+            ></span>
+          }
+        </div>
+      </div>
+    }
+    @if (capacityRooms()) {
+      <div>
+        <div class="mb-3 text-[18px] font-semibold">Capacity options</div>
+        <div class="flex flex-wrap items-center gap-4 text-[20px] font-medium">
+          <span
+            appIcon="user"
+            class="icon"
+          ></span>
+          {{ capacityRooms() }}
+        </div>
+      </div>
+    }
+    @if (workspace().deskCount || displayRooms().length) {
+      <div class="flex flex-col gap-3">
+        <div class="text-[18px] leading-[1.2] font-semibold">Availability</div>
+        @if (workspace().deskCount; as deskCount) {
+          <div class="flex flex-wrap items-center gap-4 text-[20px] font-medium">
+            <span
+              appIcon="armchair"
+              class="icon"
+            ></span>
+            <ng-container [ngPlural]="deskCount">
+              <ng-template ngPluralCase="=1">1 desk</ng-template>
+              <ng-template ngPluralCase="other">{{ deskCount }} desks</ng-template>
+            </ng-container>
+          </div>
+        }
+        @for (room of displayRooms(); track $index) {
+          <p>
+            <span
+              class="font-semibold"
+              [ngPlural]="room.count"
+            >
+              <ng-template ngPluralCase="=1">1 room</ng-template>
+              <ng-template ngPluralCase="other">{{ room.count }} rooms</ng-template>
+            </span>
+            <span
+              class="text-(--gray-color)"
+              [ngPlural]="room.capacity"
+            >
+              <ng-template ngPluralCase="=1">&nbsp;for 1 person</ng-template>
+              <ng-template ngPluralCase="other">&nbsp;for up to {{ room.capacity }} people</ng-template>
+            </span>
+          </p>
+        }
+      </div>
+    }
+  </div>
+
+  @if (workspace().userBooking; as userBooking) {
+    <div class="rounded-lg bg-(--success-bg-200) px-2 py-2.5 sm:px-4">
+      <span
+        appIcon="check"
+        class="float-left me-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-(--success-bg-500) text-[6px] text-white"
+      ></span>
+      <p class="leading-[1.5] text-black">
+        This workspace is already booked by you!
+        @if (userBooking.deskCount; as deskCount) {
+          <ng-container [ngPlural]="deskCount">
+            <ng-template ngPluralCase="=1">1 desk</ng-template>
+            <ng-template ngPluralCase="other">{{ deskCount }} desks</ng-template>
+          </ng-container>
+        }
+        @if (userBooking.roomCapacity; as roomCapacity) {
+          <ng-container [ngPlural]="roomCapacity">
+            <ng-template ngPluralCase="=1">Room for 1 person</ng-template>
+            <ng-template ngPluralCase="other">Room for {{ roomCapacity }} people</ng-template>
+          </ng-container>
+        }
+        <span class="font-semibold">
+          @if (userBooking.startDate === userBooking.endDate) {
+            {{ userBooking.startDate | date: 'longDate' }}
+          } @else {
+            {{ userBooking.startDate | date: 'longDate' }} to {{ userBooking.endDate | date: 'longDate' }}
+          }
+        </span>
+      </p>
+    </div>
+  }
+</div>

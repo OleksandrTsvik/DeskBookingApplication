@@ -1,0 +1,29 @@
+<app-modal
+  heading="Cancel your booking?"
+  icon="trash"
+  status="danger"
+  [visible]="visible()"
+  (close)="onClose()"
+>
+  <ng-template #modalBody>This action cannot be undone</ng-template>
+  <ng-template #modalFooter>
+    <div class="flex flex-wrap gap-2">
+      <button
+        appButton
+        class="flex-1"
+        variant="outlined"
+        [loading]="loading()"
+        (click)="onCancel()"
+      >
+        Yes, cancel it
+      </button>
+      <button
+        appButton
+        class="flex-1"
+        (click)="onClose()"
+      >
+        No, keep it
+      </button>
+    </div>
+  </ng-template>
+</app-modal>

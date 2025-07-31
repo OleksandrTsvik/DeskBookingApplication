@@ -1,0 +1,16 @@
+@reference '#styles.css';
+
+:host {
+  @apply w-full;
+}
+
+.label {
+  @apply block font-bold;
+
+  margin-block-end: 12px;
+  font-size: 22px;
+}
+
+.dropdown-group {
+  @apply flex flex-wrap gap-3;
+}

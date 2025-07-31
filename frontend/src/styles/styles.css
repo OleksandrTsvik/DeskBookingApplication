@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+@import './fonts.css';
+@import './icons-font.css';
+@import './variables.css';
+
+@import 'tailwindcss';
+
+@theme {
+  --font-inter: 'Inter', 'sans-serif';
+}
+
+html,
+body {
+  block-size: 100%;
+}

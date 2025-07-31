@@ -1,0 +1,20 @@
+<app-modal
+  heading="Your booking has been updated!"
+  [(visible)]="visible"
+>
+  <ng-template #modalBody>
+    Your {{ workspaceOptions() }} is now booked from
+    <span class="font-semibold text-(--text-color)">
+      {{ startDate() | date: 'longDate' }} to {{ endDate() | date: 'longDate' }}</span
+    >.
+  </ng-template>
+  <ng-template #modalFooter>
+    <a
+      appButton
+      routerLink="/bookings"
+      class="w-full"
+    >
+      My bookings
+    </a>
+  </ng-template>
+</app-modal>

@@ -1,9 +1,35 @@
-<header class="px-2 py-5 container mx-auto flex items-center justify-between">
-  <a routerLink="/">
-    <img src="assets/logo.png" alt="logo" class="w-42" />
+<header
+  class="header"
+  [class.menu-open]="isMenuOpen()"
+>
+  <a
+    routerLink="/"
+    class="header__logo"
+    (click)="onLinkClick()"
+  >
+    <img
+      class="logo__image"
+      src="assets/logo.png"
+      alt="logo"
+    />
   </a>
-  <nav class="font-semibold gap-2 sm:gap-4 md:gap-8 lg:gap-16 flex">
-    <a routerLink="/" routerLinkActive="link_active" class="link">Workspaces</a>
-    <a routerLink="bookings" routerLinkActive="link_active" class="link">My bookings</a>
+  <button
+    class="menu-icon"
+    type="button"
+    (click)="onMenuIconClick()"
+  >
+    <span></span>
+  </button>
+  <nav class="header__menu">
+    @for (link of links; track $index) {
+      <a
+        routerLinkActive="link_active"
+        class="menu__link"
+        [routerLink]="link.href"
+        (click)="onLinkClick()"
+      >
+        {{ link.title }}
+      </a>
+    }
   </nav>
 </header>

@@ -1,0 +1,134 @@
+<form
+  class="form"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit($event)"
+>
+  <div class="section section_details">
+    <h3 class="section__title">Reservation details</h3>
+
+    <app-form-control>
+      <app-input
+        name="name"
+        formControlName="name"
+        label="Name"
+      />
+    </app-form-control>
+
+    <app-form-control>
+      <app-input
+        name="email"
+        formControlName="email"
+        label="Email"
+      />
+    </app-form-control>
+
+    @if (isAvailableWorkspacesFetching()) {
+      <app-spinner
+        size="3"
+        tip="Loading workspace options ..."
+      />
+    } @else {
+      <app-form-control>
+        <app-dropdown
+          name="workspaceType"
+          formControlName="workspaceId"
+          label="Workspace type"
+          placeholder="Choose your workspace"
+          [options]="workspaceTypeOptions()"
+        />
+      </app-form-control>
+    }
+
+    @if (roomCapacities()?.length) {
+      <app-form-control errorClass="mt-3">
+        <app-checkbox-group
+          formControlName="roomCapacity"
+          label="What room size do you need?"
+          [single]="true"
+        >
+          @for (capacity of roomCapacities(); track capacity) {
+            <app-checkbox
+              name="roomCapacity-{{ $index }}"
+              [value]="capacity"
+            >
+              Room for
+              <span
+                class="font-semibold"
+                [ngPlural]="capacity"
+              >
+                <ng-template ngPluralCase="=1">1 person</ng-template>
+                <ng-template ngPluralCase="other">{{ capacity }} people</ng-template>
+              </span>
+            </app-checkbox>
+          }
+        </app-checkbox-group>
+      </app-form-control>
+    }
+
+    @if (deskCountOptions()?.length) {
+      <app-form-control>
+        <app-dropdown
+          name="deskCount"
+          formControlName="deskCount"
+          label="How many desks do you need?"
+          placeholder="Choose number of desks"
+          [options]="deskCountOptions()!"
+        />
+      </app-form-control>
+    }
+  </div>
+
+  <div class="section section_datetime">
+    <h3 class="section__title">Choose date and time</h3>
+
+    <app-form-control
+      class="datetime_group"
+      errorClass="font-semibold"
+      formGroupName="date"
+    >
+      <app-form-control>
+        <app-date-picker
+          name="startDate"
+          formControlName="startDate"
+          label="Start date"
+        />
+      </app-form-control>
+
+      <app-form-control>
+        <app-date-picker
+          name="endDate"
+          formControlName="endDate"
+          label="End date"
+        />
+      </app-form-control>
+    </app-form-control>
+
+    <app-form-control
+      class="datetime_group"
+      errorClass="font-semibold"
+      formGroupName="time"
+    >
+      <app-form-control>
+        <app-time-dropdown
+          name="startTime"
+          formControlName="startTime"
+          label="Start time"
+          placeholder="Choose start time"
+        />
+      </app-form-control>
+
+      <app-form-control>
+        <app-time-dropdown
+          name="endTime"
+          formControlName="endTime"
+          label="End time"
+          placeholder="Choose end time"
+        />
+      </app-form-control>
+    </app-form-control>
+
+    @if (actions(); as actions) {
+      <ng-container *ngTemplateOutlet="actions" />
+    }
+  </div>
+</form>

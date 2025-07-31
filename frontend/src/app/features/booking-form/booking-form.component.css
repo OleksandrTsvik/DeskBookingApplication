@@ -1,0 +1,42 @@
+@reference '#styles.css';
+
+.form {
+  @apply grid items-start;
+
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 30px;
+
+  @variant xl {
+    grid-template-columns: 3fr 1.92fr;
+  }
+}
+
+.section {
+  @apply flex flex-col items-start p-3 sm:p-10;
+
+  border-radius: 8px;
+  background: #ffffff;
+
+  @variant sm {
+    border-radius: 20px;
+  }
+}
+
+.section.section_details {
+  @apply gap-6 sm:gap-10;
+}
+
+.section.section_datetime,
+.datetime_group {
+  @apply gap-5 sm:gap-8;
+}
+
+.section__title {
+  @apply font-bold;
+
+  font-size: 32px;
+}
+
+.datetime_group {
+  @apply flex flex-col;
+}

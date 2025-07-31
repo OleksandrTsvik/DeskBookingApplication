@@ -1,0 +1,68 @@
+@reference '#styles.css';
+
+:host {
+  @apply relative w-full flex-1;
+}
+
+.label {
+  @apply mb-2 block font-medium;
+}
+
+.button {
+  @apply relative block w-full cursor-pointer truncate text-start font-medium;
+
+  border: 1px solid #c2bcd8;
+  border-radius: var(--radius-lg);
+  background: #fcfbff;
+  padding: 14px 40px 14px 16px;
+
+  @variant focus {
+    @apply ring-2 ring-[#b19cd9] outline-none;
+  }
+}
+
+.placeholder {
+  @apply font-normal;
+
+  color: #787878;
+}
+
+.icon {
+  @apply absolute;
+
+  top: 20px;
+  right: 22px;
+  color: #354052;
+  font-size: 7px;
+}
+
+.menu {
+  @apply absolute z-10 flex max-h-100 w-full flex-col overflow-auto;
+
+  gap: 10px;
+  margin-top: 4px;
+  border: 1px solid #c2bcd8;
+  border-radius: var(--radius-md);
+  background-color: #fcfbff;
+  padding: 16px 0px;
+}
+
+.menu.menu_hidden {
+  @apply hidden;
+}
+
+.menu .menu__item {
+  @apply cursor-pointer font-normal transition-colors select-none;
+
+  padding: 12.5px 16px;
+
+  @variant hover {
+    background-color: #ececff;
+  }
+}
+
+.menu .menu__item.item_active {
+  @variant not-hover {
+    background-color: #dfdfff;
+  }
+}

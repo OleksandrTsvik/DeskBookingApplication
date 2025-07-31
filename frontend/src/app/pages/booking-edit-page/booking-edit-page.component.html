@@ -1,0 +1,41 @@
+<app-page-title heading="Edit your booking" />
+
+@if (bookedWorkspace$ | async; as bookedWorkspace) {
+  <app-booking-form
+    #bookingForm
+    [initValues]="bookedWorkspace"
+    (submit)="onSubmit($event)"
+  >
+    <ng-template #formActions>
+      <div class="grid w-full grid-cols-2 gap-4">
+        <button
+          appButton
+          type="submit"
+          [disabled]="bookingForm.form.invalid"
+          [loading]="isUpdateBookedWorkspaceLoading()"
+        >
+          Save changes
+        </button>
+        <a
+          appButton
+          routerLink="/bookings"
+          variant="outlined"
+        >
+          Cancel
+        </a>
+      </div>
+    </ng-template>
+  </app-booking-form>
+
+  <app-submit-success-modal
+    [deskCount]="bookingForm.form.value.deskCount"
+    [endDate]="bookingForm.form.value.date?.endDate"
+    [roomCapacity]="bookingForm.form.value.roomCapacity"
+    [startDate]="bookingForm.form.value.date?.startDate"
+    [(visible)]="showSubmitSuccessModal"
+  />
+
+  <app-submit-error-modal [(visible)]="showSubmitErrorModal" />
+} @else {
+  <app-spinner tip="Loading ..." />
+}

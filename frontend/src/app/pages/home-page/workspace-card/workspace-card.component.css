@@ -1,0 +1,11 @@
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  background-color: var(--gray-color-100);
+  padding: 10px;
+  width: 44px;
+  height: 44px;
+  color: var(--primary-color);
+}

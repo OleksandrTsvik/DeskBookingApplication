@@ -1,0 +1,35 @@
+name: desk-booking-app
+
+services:
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_HTTP_PORTS=5000
+    ports:
+      - 5000:5000
+      - 5001:5001
+    depends_on:
+      - postgres
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 4200:4200
+    depends_on:
+      - backend
+
+  postgres:
+    image: postgres:17
+    container_name: postgres
+    environment:
+      POSTGRES_DB: desk-booking
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./.containers/postgres:/var/lib/postgresql/data

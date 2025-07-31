@@ -1,0 +1,19 @@
+@if (label()) {
+  <label
+    class="label"
+    [for]="name()"
+  >
+    {{ label() }}
+  </label>
+}
+
+<input
+  class="input"
+  autocomplete="on"
+  [disabled]="isDisabled"
+  [id]="name()"
+  [name]="name()"
+  [value]="value"
+  (blur)="onBlur()"
+  (input)="onInput($event)"
+/>

@@ -1,0 +1,33 @@
+<app-page-title
+  backLink="/workspaces"
+  heading="Book your workspace"
+/>
+
+<app-booking-form
+  #bookingForm
+  [initValues]="{ workspaceName: workspaceType() }"
+  (submit)="onSubmit($event)"
+>
+  <ng-template #formActions>
+    <button
+      appButton
+      class="w-full"
+      type="submit"
+      [disabled]="bookingForm.form.invalid"
+      [loading]="isBookWorkspaceLoading()"
+    >
+      Submit
+    </button>
+  </ng-template>
+</app-booking-form>
+
+<app-submit-success-modal
+  [deskCount]="submittedFormData()?.deskCount"
+  [email]="submittedFormData()?.email"
+  [endDate]="submittedFormData()?.endDate"
+  [roomCapacity]="submittedFormData()?.roomCapacity"
+  [startDate]="submittedFormData()?.startDate"
+  [(visible)]="showSubmitSuccessModal"
+/>
+
+<app-submit-error-modal [(visible)]="showSubmitErrorModal" />

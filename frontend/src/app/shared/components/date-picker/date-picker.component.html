@@ -1,0 +1,36 @@
+<label
+  class="label"
+  [for]="name()"
+>
+  {{ label() }}
+</label>
+
+<div class="dropdown-group">
+  <app-dropdown
+    placeholder="Day"
+    [disabled]="isDisabled"
+    [name]="name()"
+    [options]="dayOptions"
+    (change)="onChange('day', $event)"
+    (touch)="onTouch()"
+    [(value)]="selectedDay"
+  />
+  <app-dropdown
+    placeholder="Month"
+    [disabled]="isDisabled"
+    [name]="name()"
+    [options]="monthOptions"
+    (change)="onChange('month', $event)"
+    (touch)="onTouch()"
+    [(value)]="selectedMonth"
+  />
+  <app-dropdown
+    placeholder="Year"
+    [disabled]="isDisabled"
+    [name]="name()"
+    [options]="yearOptions"
+    (change)="onChange('year', $event)"
+    (touch)="onTouch()"
+    [(value)]="selectedYear"
+  />
+</div>

@@ -1,9 +1,20 @@
-import { Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+
+import { PageTitleComponent } from '@/features/page-title/page-title.component';
+import { SpinnerComponent } from '@/shared/components/spinner/spinner.component';
+
+import { HomePageService } from './home-page.service';
+import { WorkspaceCardComponent } from './workspace-card/workspace-card.component';
 
 @Component({
   selector: 'app-home-page',
-  imports: [],
+  imports: [AsyncPipe, PageTitleComponent, SpinnerComponent, WorkspaceCardComponent],
   templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.scss',
+  styleUrl: './home-page.component.css',
 })
-export class HomePageComponent {}
+export class HomePageComponent {
+  private homePageService = inject(HomePageService);
+
+  workspaces$ = this.homePageService.loadWorkspaces();
+}

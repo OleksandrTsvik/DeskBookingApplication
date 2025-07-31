@@ -1,0 +1,131 @@
+@reference '#styles.css';
+
+.header {
+  @apply container mx-auto flex items-center justify-between py-5;
+
+  @variant max-sm {
+    @variant before {
+      @apply absolute top-0 left-0 z-100 h-18.5 w-full bg-white;
+
+      content: '';
+    }
+  }
+}
+
+.header__logo {
+  @apply relative z-100;
+}
+
+.logo__image {
+  @apply w-42;
+
+  @variant max-sm {
+    @apply w-30;
+  }
+}
+
+.menu-icon {
+  @apply hidden cursor-pointer;
+
+  @variant max-sm {
+    @apply relative z-100 block h-5 w-7.5;
+  }
+}
+
+.menu-icon span,
+.menu-icon::before,
+.menu-icon::after {
+  @apply absolute left-0 h-0.5 w-full bg-(--primary-color);
+
+  transition-delay: 0s;
+  transition-duration: 0.3s;
+  transition-property: top, bottom, transform;
+  transition-timing-function: ease;
+}
+
+.menu-icon::before,
+.menu-icon::after {
+  content: '';
+}
+
+.menu-icon::before {
+  top: 0;
+}
+
+.menu-icon span {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.menu-icon::after {
+  bottom: 0;
+}
+
+.menu-open .menu-icon::before {
+  top: 50%;
+  transform: rotate(45deg) translateY(-50%);
+}
+
+.menu-open .menu-icon span {
+  transform: scale(0);
+}
+
+.menu-open .menu-icon::after {
+  bottom: 50%;
+  transform: rotate(-45deg) translateY(50%);
+}
+
+.header__menu {
+  @apply z-99 flex font-semibold sm:flex-wrap sm:gap-4 md:gap-8 lg:gap-16;
+
+  @variant max-sm {
+    @apply fixed top-[-100%] left-0 size-full flex-col justify-start overflow-auto bg-(--gray-bg-100) pt-21 pb-4;
+
+    transition: top 0.3s ease 0s;
+  }
+}
+
+.menu-open .header__menu {
+  @variant max-sm {
+    top: 0;
+  }
+}
+
+.menu__link {
+  @apply relative py-2.5;
+
+  @variant max-sm {
+    @apply px-3 py-4 text-lg;
+
+    @variant hover {
+      @apply bg-(--primary-color)/25;
+    }
+  }
+
+  @variant sm {
+    @variant hover {
+      @variant after {
+        opacity: 0.5;
+      }
+    }
+
+    @variant after {
+      @apply absolute bottom-0 left-0 h-0.5 w-full bg-(--primary-color) transition-opacity;
+
+      opacity: 0;
+      content: '';
+    }
+  }
+}
+
+.menu__link.link_active {
+  @variant max-sm {
+    @apply bg-(--primary-color) text-white;
+  }
+
+  @variant sm {
+    @variant after {
+      opacity: 1;
+    }
+  }
+}

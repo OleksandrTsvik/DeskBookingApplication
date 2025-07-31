@@ -1,0 +1,11 @@
+@reference '#styles.css';
+
+:host {
+  @apply w-full;
+}
+
+.label {
+  @apply mb-3 block font-bold;
+
+  font-size: 22px;
+}

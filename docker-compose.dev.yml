@@ -1,0 +1,42 @@
+name: desk-booking-app
+
+services:
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_HTTP_PORTS=5000
+    ports:
+      - 5000:5000
+      - 5001:5001
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:17
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: desk-booking
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./.containers/postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  pgadmin4:
+    image: dpage/pgadmin4:9
+    container_name: pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    volumes:
+      - ./.containers/pgadmin4:/var/lib/pgadmin
+    ports:
+      - 5050:80
+    depends_on:
+      - postgres

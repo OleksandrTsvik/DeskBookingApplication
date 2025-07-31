@@ -18,6 +18,7 @@ indent_size = 2
 # YAML
 [*.yml]
 quote_type = single
+indent_size = 2
 
 # Markup files
 [*.html]
@@ -93,3 +94,8 @@ dotnet_diagnostic.CA2016.severity = warning
 
 # CS8019: Unnecessary using directive
 dotnet_diagnostic.CS8019.severity = warning
+
+# Exclude EF Migrations
+[**/Infrastructure/Migrations/**.cs]
+generated_code = true
+dotnet_diagnostic.CS8019.severity = none

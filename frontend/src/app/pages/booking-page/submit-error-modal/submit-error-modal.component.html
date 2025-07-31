@@ -1,0 +1,18 @@
+<app-modal
+  #modal
+  heading="Selected time is not available"
+  icon="x"
+  status="danger"
+  [(visible)]="visible"
+>
+  <ng-template #modalBody>Please choose a different time slot</ng-template>
+  <ng-template #modalFooter>
+    <button
+      appButton
+      class="w-full"
+      (click)="modal.hide()"
+    >
+      Check availability
+    </button>
+  </ng-template>
+</app-modal>

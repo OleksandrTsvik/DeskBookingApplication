@@ -1,0 +1,43 @@
+@if (label()) {
+  <label
+    class="label"
+    [for]="name()"
+  >
+    {{ label() }}
+  </label>
+}
+
+<button
+  class="button"
+  type="button"
+  [disabled]="isDisabled"
+  [id]="name()"
+  (click)="onButtonClick()"
+>
+  @if (option(); as option) {
+    {{ option.label }}
+  } @else {
+    <span class="placeholder">{{ placeholder() }}</span>
+  }
+  <span
+    appIcon="chevron"
+    class="icon"
+  ></span>
+</button>
+
+<ul
+  class="menu"
+  role="menu"
+  [class.menu_hidden]="!isOpen"
+>
+  @for (option of options(); track $index) {
+    <li
+      class="menu__item"
+      role="menuitem"
+      [class.item_active]="compareWith(option.value, value())"
+      (click)="onOptionClick(option)"
+    >
+      {{ option.label }}
+    </li>
+  }
+</ul>
