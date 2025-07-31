@@ -52,8 +52,6 @@ jobs:
         run: npm ci
 
       - name: Build
-        env:
-          API_URL: ${{ vars.API_URL }}
         run: ng build --base-href=${{ vars.BASE_URL }}
 
       - name: Setup Pages
