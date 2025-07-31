@@ -20,6 +20,7 @@ import { DatePickerComponent } from '@/shared/components/date-picker/date-picker
 import { DropdownComponent, DropdownOption } from '@/shared/components/dropdown/dropdown.component';
 import { FormControlComponent } from '@/shared/components/form-control/form-control.component';
 import { InputComponent } from '@/shared/components/input/input.component';
+import { SpinnerComponent } from '@/shared/components/spinner/spinner.component';
 import { TimeDropdownComponent, TimeDropdownValue } from '@/shared/components/time-dropdown/time-dropdown.component';
 import { arrayRange } from '@/shared/utils/array.utils';
 import { dateOnlyToDate, toDateOnlyString, toTimeOnly, toTimeOnlyString } from '@/shared/utils/date.utils';
@@ -27,7 +28,6 @@ import { compareValuesValidator } from '@/shared/validators/compare-values.valid
 
 import { AvailableWorkspaceResponse, BookingFormInitValues, BookingFormValues } from './booking-form.models';
 import { BookingFormService } from './booking-form.service';
-import { SpinnerComponent } from "@/shared/components/spinner/spinner.component";
 
 @Component({
   selector: 'app-booking-form',
@@ -42,9 +42,9 @@ import { SpinnerComponent } from "@/shared/components/spinner/spinner.component"
     DropdownComponent,
     FormControlComponent,
     InputComponent,
+    SpinnerComponent,
     TimeDropdownComponent,
-    SpinnerComponent
-],
+  ],
   templateUrl: './booking-form.component.html',
   styleUrl: './booking-form.component.css',
 })
@@ -104,8 +104,8 @@ export class BookingFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initFormValues();
-    this.subscribeToLoadAvailableWorkspaces();
     this.subscribeToWorkspaceIdChanges();
+    this.subscribeToLoadAvailableWorkspaces();
   }
 
   onSubmit(event: Event): void {

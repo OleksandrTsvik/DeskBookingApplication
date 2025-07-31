@@ -20,6 +20,8 @@
 - [Handling validation messages in Angular like a boss](https://sergeygultyayev.medium.com/handling-errors-in-angular-forms-like-a-boss-aa73d8e22301)
 - [Angular: Consuming multiple APIS with Angular HTTPClient in a beautiful way using interceptors](https://dev.to/leonardovff/angular-consuming-multiple-apis-with-angular-httpclient-in-a-beautiful-way-using-interceptors-3im1)
 - [Angular: show loading indicator when obs$ | async is not yet resolved](https://angular.love/angular-show-loading-indicator-when-obs-async-is-not-yet-resolved)
+- [Caching API Requests in Angular: Better, Faster and Stronger](https://mohanbyte.medium.com/caching-api-requests-in-angular-better-faster-and-stronger-b3aa7c675be4)
+- [Caching with HttpInterceptor in Angular](https://blog.logrocket.com/caching-with-httpinterceptor-in-angular/)
 - [[Stack Overflow] How to get FormControl instance from ControlValueAccessor](https://stackoverflow.com/q/45755958)
 - [[YouTube] How to create custom form components in Angular with ControlValueAccessor](https://www.youtube.com/watch?v=krw9R77eV44)
 - [[YouTube] Creating custom form controls in Angular (Control Value Accessors)](https://www.youtube.com/watch?v=xTcJQaWiJ2c)
