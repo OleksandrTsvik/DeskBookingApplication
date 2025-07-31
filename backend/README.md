@@ -93,3 +93,18 @@ dotnet add reference ../Infrastructure/Infrastructure.csproj
 cd ../Infrastructure
 dotnet add reference ../Domain/Domain.csproj
 ```
+
+## 🚢 Docker Hub
+
+### Docker build
+
+```sh
+docker build . -t oleksandrtsvik/desk-booking-app:latest
+```
+
+### Push images to a repository
+
+```sh
+docker login
+docker push oleksandrtsvik/desk-booking-app:latest
+```
